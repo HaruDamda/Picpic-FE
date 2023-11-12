@@ -1,0 +1,161 @@
+.MakeFrame {
+  width: 390px;
+  height: calc(var(--vh, 1vh) * 100);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.Top {
+  width: 390px;
+  height: 86px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Top button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.TextBtn {
+  width: 95px;
+  height: 24px;
+  background-color: #f7f8f8;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 19px;
+  margin: 0px 9px;
+}
+
+.ImgBtn {
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+}
+
+.Middle {
+  width: 390px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f8f8;
+}
+
+.Frame {
+  width: 144px;
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: #fff;
+  gap: 7px;
+}
+
+.Frame span {
+  width: 125px;
+  height: 78px;
+  background-color: #f5f5f5;
+}
+
+.Frame span:nth-child(1) {
+  margin-top: 10px;
+}
+
+.Return {
+  width: 390px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.Return button {
+  background-color: #ffffff;
+}
+
+.Bottom {
+  width: 100%;
+  height: 270px;
+}
+
+.ListTop {
+  height: 40px;
+  padding: 14px 14px 14px 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.ListTop button {
+  background-color: #ffffff;
+}
+
+.ListView {
+  display: inline-flex;
+  height: 160px;
+  padding: 15px 0px 15px 18px;
+  flex-direction: row;
+  gap: 18px;
+}
+
+.ListView span {
+  width: 72px;
+  height: 130px;
+  border-radius: 10px;
+  background: #d9d9d9;
+}
+
+.ListBottom {
+  width: 390px;
+  height: 70px;
+  background: #f7f8f8;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.ListBottom button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.ListBottom button img {
+  width: 24px;
+  height: 24px;
+}
+
+.now {
+  color: #009eff;
+  font-weight: 600;
+}
+
+button {
+  outline: none;
+}
+
+button:hover {
+  outline: none;
+  color: #009eff;
+  font-weight: 600;
+}

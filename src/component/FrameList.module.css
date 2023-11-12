@@ -1,0 +1,14 @@
+.FrameList {
+  width: 390px;
+  height: 689px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.newFrame {
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid var(--, #009eff);
+}

@@ -1,0 +1,34 @@
+.Bottom {
+  width: 390px;
+  height: 270px;
+}
+
+.ListView {
+  display: inline-flex;
+  height: 200px;
+  padding: 15px 0px 15px 18px;
+  flex-direction: row;
+  gap: 18px;
+}
+
+.ListView button {
+  background: #ffffff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ListView button:visited {
+  border: none;
+  outline: none;
+}
+
+.ListView button:hover {
+  border: none;
+  outline: none;
+}
+
+.ListView button:active {
+  border: none;
+  outline: none;
+}
