@@ -1,0 +1,45 @@
+.Bottom {
+  width: 390px;
+  height: 270px;
+}
+
+.ListTop {
+  height: 40px;
+  padding: 14px 14px 14px 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.ListTop button {
+  background-color: #ffffff;
+  border: none;
+}
+
+.ListView {
+  display: inline-flex;
+  height: 160px;
+  padding: 15px 0px 15px 18px;
+  flex-direction: row;
+  gap: 18px;
+}
+
+.ListView span {
+  width: 72px;
+  height: 130px;
+  border-radius: 10px;
+  background: #d9d9d9;
+}
+
+button {
+  outline: none;
+}
+
+button:hover {
+  outline: none;
+  color: #009eff;
+  font-weight: 600;
+}
