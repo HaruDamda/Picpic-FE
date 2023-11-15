@@ -1,63 +1,75 @@
-import React, { useState, useEffect, useSelector } from "react";
-import styles from "./FrameList.module.css";
-import { Link } from "react-router-dom";
-import { getAllFrames } from "../../apis/getFrame";
+import React, { useState } from "react";
+import map from "../img/map.png";
+import frame from "../img/frame-line.png";
+import book from "../img/book.png";
+import person from "../img/person.png";
+import framelist from "../img/framelist.png";
+import styles from "./Frame.module.css";
+import Template from "../component/Template";
+import FrameList from "../component/FrameList";
+import Background from "../component/Background";
+import Brush from "../component/Brush";
+import AddPhoto from "../component/AddPhoto";
+import { useNavigate } from "react-router-dom";
 
-const FrameList = () => {
-  const [frames, setFrames] = useState([]);
+const Frame = () => {
+  const [selectedButton, setSelectedButton] = useState("지도");
 
-  useEffect(() => {
-    async function fetchFrames() {
-      try {
-        const apiURL =
-          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/get/frame";
+  const handleButtonClick = (button) => {
+    setSelectedButton(button);
+  };
 
-        // GET 요청을 보내 프레임 데이터를 가져옴
-        const res = await fetch(apiURL);
-        if (res.ok) {
-          const framesData = await res.json();
-          setFrames(framesData); // 가져온 프레임 데이터를 상태에 설정
-        } else {
-          // 서버에서 오류 응답을 받은 경우에 대한 처리
-          throw new Error("Failed to fetch frames");
-        }
-      } catch (err) {
-        console.error("Error fetching frames:", err);
-        // 에러 처리 로직
-      }
-    }
+  let middleContent;
 
-    fetchFrames();
-  }, []);
+  switch (selectedButton) {
+    case "지도":
+      middleContent = "dd";
+      break;
+    case "프레임 제작":
+      middleContent = <FrameList />;
+      break;
+    case "포토북":
+      middleContent = "dd";
+      break;
+    case "마이":
+      middleContent = "dd";
+      break;
+    default:
+      middleContent = "dd";
+      break;
+  }
 
   return (
-    <div className={styles.FrameList}>
-      <Link to="/makeframe">
-        <button className={styles.newFrame}>새 프레임 만들기</button>
-      </Link>
-      <div className={styles.FrameScroll}>
-        <ul className={styles.FrameUl}>
-          {frames.map((frame, index) => (
-            <li key={frame.id} className={styles.FrameItem}>
-              {/* 각 프레임 정보를 두 줄씩 나열 */}
-              <div>
-                <img
-                  src={frame.imageUrl}
-                  alt={`Frame ${index}`}
-                  className={styles.FrameImage}
-                />
-              </div>
-              <div>
-                <p>프레임 ID: {frame.id}</p>
-                <p>프레임 제목: {frame.title}</p>
-                {/* 원하는 다른 프레임 정보를 보여줄 수 있음 */}
-              </div>
-            </li>
-          ))}
-        </ul>
+    <div className={styles.Frame}>
+      <div className={styles.Top}>
+        <span>전체 프레임</span>
+        <button className={styles.mylistBtn}>
+          <img src={framelist} alt="framelist"></img>
+        </button>
+      </div>
+      <div className={styles.Middle}>{middleContent}</div>
+      <div className={styles.Bottom}>
+        <div className={styles.ListBottom}>
+          <button onClick={() => handleButtonClick("지도")}>
+            <img src={map} alt="map"></img>
+            템플릿
+          </button>
+          <button onClick={() => handleButtonClick("프레임 제작")}>
+            <img src={frame} alt="frame"></img>
+            프레임 제작
+          </button>
+          <button onClick={() => handleButtonClick("포토북")}>
+            <img src={book} alt="book"></img>
+            포토북
+          </button>
+          <button onClick={() => handleButtonClick("마이")}>
+            <img src={person} alt="person"></img>
+            마이
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default FrameList;
+export default Frame;

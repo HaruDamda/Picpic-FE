@@ -21,7 +21,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [isActivePw, setIsActivePw] = useState(false);
-  const router = useNavigate();
+  // const router = useNavigate();
   const dispatch = useDispatch();
 
   const isPassedLogin = () => {
@@ -49,7 +49,7 @@ function LoginForm() {
       email,
       password,
     };
-    onLogin(requestBody.email, requestBody.password, router);
+    onLogin(requestBody.email, requestBody.password, dispatch);
     // router("/dashboard");
   };
 
