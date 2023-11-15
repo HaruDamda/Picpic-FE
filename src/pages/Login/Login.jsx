@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./Login.module.scss";
 import logo from "../../assets/logo.png";
 import chevron from "../../assets/icons8-셰브론-오른쪽-52.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { onLogin } from "../../apis/onLogin";
 import { useDispatch } from "react-redux";
 
@@ -21,7 +21,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [isActivePw, setIsActivePw] = useState(false);
-	// const router = useNavigate();
+	const router = useNavigate();
   const dispatch = useDispatch();
 
   const isPassedLogin = () => {
@@ -50,7 +50,7 @@ function LoginForm() {
       password,
     };
     onLogin(requestBody.email, requestBody.password, dispatch);
-    // router("/dashboard");
+    router("/");
   };
 
   return (
@@ -141,3 +141,9 @@ function LoginForm() {
 		</div>
   );
 }
+
+
+
+
+
+
