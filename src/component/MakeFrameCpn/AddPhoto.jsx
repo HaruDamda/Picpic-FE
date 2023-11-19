@@ -12,10 +12,10 @@ const AddPhoto = ({ handleUploadedImage }) => {
   const handleChange = (e) => {
     const selectedFile = e.target.files[0];
 
-    // FileReader를 사용하여 선택된 파일을 읽습니다.
+    // FileReader를 사용하여 선택된 파일을 읽어 옴
     const reader = new FileReader();
     reader.onloadend = () => {
-      // 이미지 데이터를 MakeFrame 컴포넌트로 전달합니다.
+      // 이미지 데이터를 MakeFrame 컴포넌트로 전달
       handleUploadedImage(reader.result);
     };
     if (selectedFile) {
