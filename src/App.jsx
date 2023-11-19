@@ -6,7 +6,11 @@ import Main from "./pages/Main/Main";
 import Frame from "./pages/Frame/Frame";
 import MakeFrame from "./pages/Frame/MakeFrame";
 import Photobook from "./pages/Photobook/Photobook";
-import { BrowserView, MobileView } from "react-device-detect";
+import {
+  BrowserView,
+  MobileView,
+} from "react-device-detect";
+import FrameList from "./component/AllFrameCpn/FrameList";
 
 function App() {
   function setScreenSize() {
@@ -20,34 +24,36 @@ function App() {
 
   return (
     <>
-      <div className="App">
-        <header className="App-header">
-          <BrowserView>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/join" element={<Join />} />
-                <Route path="/frame" element={<Frame />} />
-                <Route path="/makeframe" element={<MakeFrame />} />
-                <Route path="/photobook" element={<Photobook />} />
-              </Routes>
-            </BrowserRouter>
-          </BrowserView>
-          <MobileView>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/join" element={<Join />} />
-                <Route path="/frame" element={<Frame />} />
-                <Route path="/makeframe" element={<MakeFrame />} />
-                <Route path="/photobook" element={<Photobook />} />
-              </Routes>
-            </BrowserRouter>
-          </MobileView>
-        </header>
-      </div>
+    <div className="App">
+      <header className="App-header">
+        <BrowserView>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/join" element={<Join />} />
+              <Route path="/frame" element={<Frame />} />
+              <Route path="/makeframe" element={<MakeFrame />} />
+              <Route path="/photobook" element={<Photobook />} />
+              <Route path="/framelist" element={<FrameList />} />
+            </Routes>
+          </BrowserRouter>
+        </BrowserView>
+        <MobileView>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/join" element={<Join />} />
+              <Route path="/frame" element={<Frame />} />
+              <Route path="/makeframe" element={<MakeFrame />} />
+              <Route path="/photobook" element={<Photobook />} />
+              <Route path="/framelist" element={<FrameList />} />
+            </Routes>
+          </BrowserRouter>
+        </MobileView>
+      </header>
+    </div>
     </>
   );
 }

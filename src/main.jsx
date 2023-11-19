@@ -3,17 +3,12 @@ import ReactDOM from "react-dom/client";
 import axios from "axios";
 import App from "./App.jsx";
 import "./index.css";
-import { Provider } from 'react-redux';
-import { store, persistor } from "./store/store.js";
-import { PersistGate } from "redux-persist/integration/react";
+// import { Provider } from 'jotai';
+// import { accessTokenAtom } from './store/jotaiAtoms.js';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
+    <App />
   </React.StrictMode>
 )
 

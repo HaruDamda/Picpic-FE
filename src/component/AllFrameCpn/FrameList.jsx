@@ -1,19 +1,26 @@
-import React, { useState, useEffect, useSelector } from "react";
+import { useState, useEffect } from "react";
 import styles from "./FrameList.module.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // import { getAllFrames } from "../../apis/getFrame";
+import { useAtomValue } from 'jotai';
+import { accessTokenAtom } from '../../store/jotaiAtoms';
 
 const FrameList = () => {
   const [frames, setFrames] = useState([]);
-
+  const [accessToken, setAccessToken] = useAtomValue(accessTokenAtom);
   useEffect(() => {
     async function fetchFrames() {
       try {
         const apiURL =
           "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/get/frame";
 
-        const res = await axios.get(apiURL);
+        // 토큰을 헤더에 추가하여 이미지 리스트 요청
+        const res = await axios.get(apiURL, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
 
         if (res.status === 200) {
           setFrames(res.data); // 가져온 프레임 데이터를 상태에 설정
