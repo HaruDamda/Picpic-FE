@@ -3,38 +3,38 @@ import styles from "./FrameList.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 // import { getAllFrames } from "../../apis/getFrame";
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { accessTokenAtom } from '../../store/jotaiAtoms';
 
 const FrameList = () => {
   const [frames, setFrames] = useState([]);
-  const [accessToken, setAccessToken] = useAtomValue(accessTokenAtom);
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  
+  
   useEffect(() => {
-    async function fetchFrames() {
-      try {
-        const apiURL =
-          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/get/frame";
+    // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
+    if (accessToken) {
+      console.log('Framelist ACT:', accessToken);
+      // axios 요청 설정
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
+        },
+      };
 
-        // 토큰을 헤더에 추가하여 이미지 리스트 요청
-        const res = await axios.get(apiURL, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+      // API 요청 보내기
+      axios.get('http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/get/frame', config)
+        .then((res) => {
+          console.log(res.data);
+          // 성공적으로 데이터를 받아온 경우
+          setFrames(res.data); // 받아온 데이터로 frames 상태 업데이트
+        })
+        .catch((err) => {
+          // 오류 처리
+          console.error('API 요청 중 오류 발생:', err);
         });
-
-        if (res.status === 200) {
-          setFrames(res.data); // 가져온 프레임 데이터를 상태에 설정
-        } else {
-          // 서버에서 오류 응답을 받은 경우에 대한 처리
-          throw new Error("Failed to fetch frames");
-        }
-      } catch (err) {
-        console.error("Error fetching frames:", err);
-      }
     }
-
-    fetchFrames();
-  }, []);
+  }, [accessToken]); // useEffect가 실행되는 조건을 accessToken이 변경될 때로 설정
 
   return (
     <div className={styles.FrameList}>
