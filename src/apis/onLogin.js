@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setAccessToken } from "../store/userSlice";
 // import { login, getToken } from "../store/userSlice";
 // import crypto from "crypto";
 
@@ -52,19 +53,27 @@ export const reissueToken = (accessToken) => {
 };
 */
 
-export function onLogin(email, password) {
-  const data = { 
+export function onLogin(email, password, dispatch, router) {
+  const data = {
     email,
     password,
   };
   axios
-    .post("http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/login", data)
+    .post(
+      "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/login",
+      data
+    )
     .then((res) => {
       const { accessToken } = res.data;
+      // 액세스 토큰을 Redux 스토어에 저장
+      dispatch(setAccessToken(accessToken));
+
       // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       // accessToken을 localStorage, cookie 등에 저장하지 않는다!
-      console.log(res.data)
+
+      router("/frame");
+      console.log(res.data);
     })
     .catch((err) => {
       console.log(err);

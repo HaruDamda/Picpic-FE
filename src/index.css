@@ -6,7 +6,8 @@
 :root {
   font-family: "SUIT Variable", sans-serif;
   font-weight: 400;
-  color: #1A1E27;
-  width: 100vw;
-  margin: 0;
+  color: #1a1e27;
+  max-width: 390px;
+  --vh: 100%;
+  margin: 0 auto;
 }

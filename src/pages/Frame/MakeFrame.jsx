@@ -10,6 +10,7 @@ import brush from "../../img/brush.png";
 import addphoto from "../../img/addphoto.png";
 import left from "../../img/left.png";
 import right from "../../img/right.png";
+import framebase from "../../assets/framebase.png";
 import styles from "./MakeFrame.module.css";
 import Template from "../../component/MakeFrameCpn/Template";
 import Sticker from "../../component/MakeFrameCpn/Sticker";
@@ -48,6 +49,10 @@ const MakeFrame = () => {
   const [isListHover, setIsListHover] = useState(false);
   const [selectedBrushSize, setSelectedBrushSize] = useState("medium");
   const [selectedColor, setSelectedColor] = useState("#000000");
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [stickerPos, setStickerPos] = useState([]);
+  const [frameImage, setFrameImage] = useState(framebase);
+  const [actions, setActions] = useState([]);
 
   const accessToken = useSelector((state) => state.user.accessToken);
 
@@ -55,8 +60,13 @@ const MakeFrame = () => {
     setSelectedButton(button);
     if (button !== "브러쉬") {
       // '브러쉬' 버튼이 아닌 경우 브러쉬 크기 설정을 초기화
-      setBrushSize("medium");
+      setSelectedBrushSize("medium");
     }
+  };
+
+  // Sticker 컴포넌트에서 선택한 스티커를 중앙에 나타내기 위한 함수
+  const handleStickerSelect = (sticker) => {
+    setSelectedSticker(sticker);
   };
 
   /*if (button === "브러쉬") {
@@ -64,6 +74,47 @@ const MakeFrame = () => {
   } else {
     setIsBrushSizeVisible(false);
   }*/
+
+  // Sticker에서 전달된 스티커 위치 정보를 받는 함수
+  const handleStickerDrag = ({ index, x, y }) => {
+    const newStickerPos = [...stickerPos];
+    newStickerPos[index] = { x, y };
+    setStickerPos(newStickerPos);
+  };
+
+  // UploadedImage와 스티커들을 합성하여 보여주는 함수
+  const renderFrame = () => {
+    const uploadedImageStyle = uploadedImage
+      ? { position: "absolute", top: 0, left: 0 }
+      : {};
+
+    return (
+      <div className={styles.Frame} style={{ position: "relative" }}>
+        <img src={framebase} alt="framebase" className={styles.BaseFrame} />
+        {uploadedImage && (
+          <img
+            src={uploadedImage}
+            alt="uploadedImage"
+            className={styles.UploadedImage}
+            style={uploadedImageStyle}
+          />
+        )}
+        {stickerPos.map((position, index) => (
+          <img
+            key={index}
+            src={sticker} // 스티커 이미지 경로를 넣어주세요
+            alt={`sticker_${index}`}
+            className={styles.Sticker}
+            style={{ position: "absolute", top: position.y, left: position.x }}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const changeFrameImage = (newFrameImage) => {
+    setFrameImage(newFrameImage);
+  };
 
   const handleSaveClick = () => {
     const frameElement = document.querySelector(`.${styles.Frame}`);
@@ -92,13 +143,17 @@ const MakeFrame = () => {
         image: imageData,
       }),
     })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
         console.log("이미지 저장 성공:", data);
       })
-      .catch((error) => {
-        console.error("이미지 저장 실패:", error);
+      .catch((err) => {
+        console.error("이미지 저장 실패:", err);
       });
+  };
+
+  const handleUploadedImage = (imageData) => {
+    setUploadedImage(imageData);
   };
 
   let bottomContent;
@@ -108,16 +163,21 @@ const MakeFrame = () => {
       bottomContent = <Template />;
       break;
     case "스티커":
-      bottomContent = <Sticker />;
+      bottomContent = <Sticker onStickerSelect={handleStickerSelect} />;
       break;
     case "배경":
-      bottomContent = <Background />;
+      bottomContent = (
+        <Background
+          changeFrameImage={changeFrameImage}
+          frameImage={frameImage}
+        />
+      );
       break;
     case "브러쉬":
       bottomContent = <Brush selectedColor={selectedColor} />;
       break;
     case "사진 추가":
-      bottomContent = <AddPhoto />;
+      bottomContent = <AddPhoto handleUploadedImage={handleUploadedImage} />;
       break;
     default:
       bottomContent = <Template />;
@@ -133,6 +193,26 @@ const MakeFrame = () => {
         />
       </div>
     ) : null;
+
+  // 'left' 버튼을 누를 때 이전 동작으로 되돌리는 함수
+  const handleUndo = () => {
+    if (actions.length > 0) {
+      const lastAction = actions[actions.length - 1];
+      // 이전 동작을 실행하기 전에 해당 동작을 배열에서 제거
+      setActions((prevActions) => prevActions.slice(0, -1));
+
+      // TODO: 해당 동작에 따른 처리 구현
+      // 예를 들어, 특정 동작에 대한 역으로 처리하는 코드 작성
+      // 예: if (lastAction === '이미지 추가') { /* 이미지 삭제 로직 */ }
+    }
+  };
+
+  // 'right' 버튼을 누를 때 다시 실행하는 함수
+  const handleRedo = () => {
+    // TODO: 재실행 로직 구현
+    // actions 배열에 저장된 동작을 순회하며 재실행하는 로직 작성
+    // 예: actions.forEach((action) => { /* 각 동작에 대한 처리 */ });
+  };
 
   return (
     <div className={styles.MakeFrame}>
@@ -153,17 +233,25 @@ const MakeFrame = () => {
           <div className={styles.FrameImg}>
             {middleContent}
             <div className={styles.Frame}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+              <img
+                src={frameImage}
+                alt="framebase"
+                className={styles.BaseFrame}
+              />
+              {uploadedImage && (
+                <img
+                  src={uploadedImage}
+                  alt="uploadedImage"
+                  className={styles.UploadedImage}
+                />
+              )}
             </div>
           </div>
           <div className={styles.Return}>
-            <button>
+            <button onClick={handleUndo}>
               <img src={left} alt="left" />
             </button>
-            <button>
+            <button onClick={handleRedo}>
               <img src={right} alt="right" />
             </button>
           </div>

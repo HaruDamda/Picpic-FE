@@ -4,6 +4,7 @@
   background: #ffffff;
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 
 .Top {
@@ -114,9 +115,4 @@
 .ListBottom button img {
   width: 24px;
   height: 24px;
-}
-
-.now {
-  color: #009eff;
-  font-weight: 600;
 }
