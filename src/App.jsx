@@ -23,8 +23,6 @@ function App() {
       <div className="App">
         <header className="App-header">
           <BrowserView>
-            <h1>모바일로 접속해주세요</h1>
-            <h2>PC 뷰는 준비 중 ...</h2>
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Main />} />

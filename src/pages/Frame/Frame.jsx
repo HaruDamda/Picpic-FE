@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDrag } from "react-use-gesture";
+import { useSpring, animated } from "react-spring";
 import map from "../../img/map.png";
 import frame from "../../img/frame-line.png";
 import book from "../../img/book.png";
@@ -13,7 +15,17 @@ import AddPhoto from "../../component/MakeFrameCpn/AddPhoto";
 import { Link } from "react-router-dom";
 
 const Frame = () => {
-  const [selectedButton, setSelectedButton] = useState("지도");
+  const [selectedButton, setSelectedButton] = useState("프레임 제작");
+  // const [logoPos, setlogoPos] = useState({ x: 0, y: 0 });
+  const logoPos = useSpring({ x: 0, y: 0 });
+  const bindLogoPos = useDrag((params) => {
+    // setlogoPos({
+    //   x: params.offset[0],
+    //   y: params.offset[1],
+    // });
+    logoPos.x.set(params.offset[0]);
+    logoPos.y.set(params.offset[1]);
+  });
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
@@ -22,9 +34,6 @@ const Frame = () => {
   let middleContent;
 
   switch (selectedButton) {
-    case "지도":
-      middleContent = "dd";
-      break;
     case "프레임 제작":
       middleContent = <FrameList />;
       break;
@@ -41,6 +50,15 @@ const Frame = () => {
 
   return (
     <div className={styles.Frame}>
+      <animated.div
+        {...bindLogoPos()}
+        style={{
+          /*position: "relative", top: logoPos.y, left: logoPos.x*/ x: logoPos.x,
+          y: logoPos.y,
+        }}
+      >
+        <img src={framelist} className="home" alt="home"></img>
+      </animated.div>
       <div className={styles.Top}>
         <span>전체 프레임</span>
         <button className={styles.mylistBtn}>
@@ -50,10 +68,6 @@ const Frame = () => {
       <div className={styles.Middle}>{middleContent}</div>
       <div className={styles.Bottom}>
         <div className={styles.ListBottom}>
-          <button onClick={() => handleButtonClick("지도")}>
-            <img src={map} alt="map"></img>
-            템플릿
-          </button>
           <button onClick={() => handleButtonClick("프레임 제작")}>
             <img src={frame} alt="frame"></img>
             프레임 제작
