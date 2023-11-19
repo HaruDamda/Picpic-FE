@@ -137,7 +137,7 @@ export default function SignUp() {
       [name]: !checkStates[name],
     };
     setCheckStates(newCheckStates);
-  
+
     // 전체 동의 체크 여부 확인
     const allChecked = Object.values(newCheckStates).every((state) => state);
     setAllCheck(allChecked);
@@ -246,7 +246,9 @@ export default function SignUp() {
           <select
             className={styles.ageScroll}
             value={formData.birth || ""}
-            onChange={(e) => setFormData({ ...formData, birth: Number(e.target.value) })}
+            onChange={(e) =>
+              setFormData({ ...formData, birth: Number(e.target.value) })
+            }
           >
             <option value="">출생년도 입력(선택)</option>
             {[...Array(87)].map((_, index) => (

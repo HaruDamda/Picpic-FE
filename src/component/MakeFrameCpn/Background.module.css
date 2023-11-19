@@ -20,18 +20,69 @@
 }
 
 .ListView {
-  display: inline-flex;
+  width: 100%;
   height: 160px;
   padding: 15px 0px 15px 18px;
-  flex-direction: row;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 18px;
 }
 
-.ListView span {
+.FirstLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.FirstLine button {
   width: 72px;
-  height: 130px;
+  height: 60px;
   border-radius: 10px;
-  background: #d9d9d9;
+}
+
+.FirstLine button:nth-child(1) {
+  background: #ffc700;
+}
+
+.FirstLine button:nth-child(2) {
+  background: #fffdba;
+}
+
+.FirstLine button:nth-child(3) {
+  background: #ffde7d;
+}
+
+.FirstLine button:nth-child(4) {
+  background: #f69401;
+}
+
+.SecondLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.SecondLine button {
+  width: 72px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+.SecondLine button:nth-child(1) {
+  background: #8bd3ff;
+}
+
+.SecondLine button:nth-child(2) {
+  background: #0066ff;
+}
+
+.SecondLine button:nth-child(3) {
+  background: #009eff;
+}
+
+.SecondLine button:nth-child(4) {
+  background: #f1ffad;
 }
 
 button {

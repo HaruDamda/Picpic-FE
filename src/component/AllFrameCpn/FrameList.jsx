@@ -47,11 +47,7 @@ const FrameList = () => {
             <li key={frame.id} className={styles.FrameItem}>
               {/* 각 프레임 정보를 두 줄씩 나열 */}
               <div>
-                <img
-                  src={frame.imageUrl}
-                  alt={`Frame ${index}`}
-                  className={styles.FrameImage}
-                />
+                <img src={frame} alt="frame" className={styles.FrameImage} />
               </div>
               <div>
                 <p>프레임 ID: {frame.id}</p>

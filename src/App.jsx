@@ -13,13 +13,20 @@ import {
 import FrameList from "./component/AllFrameCpn/FrameList";
 
 function App() {
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+
+  setScreenSize();
+
+  window.addEventListener("resize", setScreenSize);
+
   return (
     <>
     <div className="App">
       <header className="App-header">
         <BrowserView>
-          {/* <h1>모바일로 접속해주세요</h1>
-          <h2>PC 뷰는 준비 중 ...</h2> */}
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Main />} />
@@ -48,7 +55,7 @@ function App() {
       </header>
     </div>
     </>
-  )
+  );
 }
 
 export default App;
