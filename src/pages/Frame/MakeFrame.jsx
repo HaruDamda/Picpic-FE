@@ -50,7 +50,7 @@ const MakeFrame = () => {
   const [selectedBrushSize, setSelectedBrushSize] = useState("medium");
   const [selectedColor, setSelectedColor] = useState("#000000");
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [stickerPos, setStickerPos] = useState([]);
+  const [stickerPositions, setStickerPositions] = useState([]);
   const [frameImage, setFrameImage] = useState(framebase);
   const [actions, setActions] = useState([]);
 
@@ -64,22 +64,22 @@ const MakeFrame = () => {
     }
   };
 
-  // Sticker 컴포넌트에서 선택한 스티커를 중앙에 나타내기 위한 함수
-  const handleStickerSelect = (sticker) => {
-    setSelectedSticker(sticker);
-  };
-
   /*if (button === "브러쉬") {
     setIsBrushSizeVisible(true);
   } else {
     setIsBrushSizeVisible(false);
   }*/
 
+  const handleStickerSelect = (selectedSticker) => {
+    // Sticker 컴포넌트로부터 받은 스티커 정보로 중앙에 스티커 렌더링
+    setUploadedSticker(selectedSticker);
+  };
+
   // Sticker에서 전달된 스티커 위치 정보를 받는 함수
   const handleStickerDrag = ({ index, x, y }) => {
-    const newStickerPos = [...stickerPos];
-    newStickerPos[index] = { x, y };
-    setStickerPos(newStickerPos);
+    const newStickerPositions = [...stickerPositions];
+    newStickerPositions[index] = { x, y };
+    setStickerPositions(newStickerPositions);
   };
 
   // UploadedImage와 스티커들을 합성하여 보여주는 함수
@@ -99,7 +99,7 @@ const MakeFrame = () => {
             style={uploadedImageStyle}
           />
         )}
-        {stickerPos.map((position, index) => (
+        {stickerPositions.map((position, index) => (
           <img
             key={index}
             src={sticker} // 스티커 이미지 경로를 넣어주세요
@@ -163,7 +163,7 @@ const MakeFrame = () => {
       bottomContent = <Template />;
       break;
     case "스티커":
-      bottomContent = <Sticker onStickerSelect={handleStickerSelect} />;
+      bottomContent = <Sticker onStickerDrag={handleStickerDrag} />;
       break;
     case "배경":
       bottomContent = (
@@ -243,6 +243,19 @@ const MakeFrame = () => {
                   src={uploadedImage}
                   alt="uploadedImage"
                   className={styles.UploadedImage}
+                />
+              )}
+              {uploadedSticker && (
+                <img
+                  src={uploadedSticker}
+                  alt="uploadedSticker"
+                  className={styles.UploadedSticker}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
                 />
               )}
             </div>

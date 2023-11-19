@@ -5,17 +5,10 @@ import axios from "axios";
 
 const Sticker = ({ onStickerSelect }) => {
   const [stickers, setStickers] = useState([]);
-  const [stickerPos, setStickerPos] = useState({ x: 0, y: 0 });
+  const [stickerPos, setstickerPos] = useState({ x: 0, y: 0 });
   const [selectedTheme, setSelectedTheme] = useState(1);
 
   const themes = [1, 2, 3, 4, 5];
-
-  const bindStickerPos = useDrag((params) => {
-    setStickerPos({
-      x: params.offset[0],
-      y: params.offset[1],
-    });
-  });
 
   // 서버로부터 스티커 데이터를 가져오는 함수
   const fetchStickers = async (theme) => {
@@ -40,6 +33,11 @@ const Sticker = ({ onStickerSelect }) => {
     setSelectedTheme(themeNumber); // 클릭된 테마 버튼의 테마 번호를 설정
   };
 
+  const handleStickerClick = (stickerInfo) => {
+    // 선택한 스티커 정보를 MakeFrame 컴포넌트로 전달
+    onStickerSelect(stickerInfo);
+  };
+
   return (
     <div className={styles.Bottom}>
       <div className={styles.ListTop}>
@@ -49,18 +47,14 @@ const Sticker = ({ onStickerSelect }) => {
           </button>
         ))}
       </div>
-      <div
-        {...bindStickerPos()}
-        style={{ position: "relative", top: stickerPos.y, left: stickerPos.x }}
-        className={styles.ListView}
-      >
+      <div className={styles.ListView}>
         {stickers.map((sticker, index) => (
           <img
             key={index}
             src={sticker}
             alt="sticker"
             className={styles.Sticker}
-            onClick={() => onStickerSelect(sticker)}
+            onClick={() => handleStickerClick(sticker)}
           />
         ))}
       </div>
