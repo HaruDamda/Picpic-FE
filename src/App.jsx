@@ -10,6 +10,7 @@ import {
   BrowserView,
   MobileView,
 } from "react-device-detect";
+import FrameList from "./component/AllFrameCpn/FrameList";
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <BrowserView>
-          <h1>모바일로 접속해주세요</h1>
-          <h2>PC 뷰는 준비 중 ...</h2>
+          {/* <h1>모바일로 접속해주세요</h1>
+          <h2>PC 뷰는 준비 중 ...</h2> */}
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Main />} />
@@ -27,6 +28,7 @@ function App() {
               <Route path="/frame" element={<Frame />} />
               <Route path="/makeframe" element={<MakeFrame />} />
               <Route path="/photobook" element={<Photobook />} />
+              <Route path="/framelist" element={<FrameList />} />
             </Routes>
           </BrowserRouter>
         </BrowserView>
@@ -39,6 +41,7 @@ function App() {
               <Route path="/frame" element={<Frame />} />
               <Route path="/makeframe" element={<MakeFrame />} />
               <Route path="/photobook" element={<Photobook />} />
+              <Route path="/framelist" element={<FrameList />} />
             </Routes>
           </BrowserRouter>
         </MobileView>
