@@ -1,8 +1,6 @@
 :root {
   font-family: "SUIT Variable", sans-serif;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  max-width: 1280px;
   text-align: center;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
 }

@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Join from "./pages/Join/Join";
@@ -11,14 +12,16 @@ import {
   MobileView,
 } from "react-device-detect";
 import FrameList from "./component/AllFrameCpn/FrameList";
+import PhotoSelect from "./pages/Photobook/PhotoSelect";
 
 function App() {
   function setScreenSize() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   }
-
-  setScreenSize();
+  useEffect(() => {
+    setScreenSize();
+  });
 
   window.addEventListener("resize", setScreenSize);
 
@@ -36,6 +39,7 @@ function App() {
               <Route path="/makeframe" element={<MakeFrame />} />
               <Route path="/photobook" element={<Photobook />} />
               <Route path="/framelist" element={<FrameList />} />
+              <Route path="/photoselect" element={<PhotoSelect />} />
             </Routes>
           </BrowserRouter>
         </BrowserView>
@@ -49,6 +53,7 @@ function App() {
               <Route path="/makeframe" element={<MakeFrame />} />
               <Route path="/photobook" element={<Photobook />} />
               <Route path="/framelist" element={<FrameList />} />
+              <Route path="/photoselect" element={<PhotoSelect />} />
             </Routes>
           </BrowserRouter>
         </MobileView>
