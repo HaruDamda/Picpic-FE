@@ -53,8 +53,9 @@ const MakeFrame = () => {
   const [stickerPositions, setStickerPositions] = useState([]);
   const [frameImage, setFrameImage] = useState(framebase);
   const [actions, setActions] = useState([]);
-
-  const accessToken = useSelector((state) => state.user.accessToken);
+  const [uploadedSticker, setUploadedSticker] = useState(null);
+  const [stickerSize, setStickerSize] = useState(100);
+  const [selectedSticker, setSelectedSticker] = useState(null);
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
@@ -73,6 +74,7 @@ const MakeFrame = () => {
   const handleStickerSelect = (selectedSticker) => {
     // Sticker 컴포넌트로부터 받은 스티커 정보로 중앙에 스티커 렌더링
     setUploadedSticker(selectedSticker);
+    setSelectedSticker(selectedSticker);
   };
 
   // Sticker에서 전달된 스티커 위치 정보를 받는 함수
@@ -160,10 +162,12 @@ const MakeFrame = () => {
 
   switch (selectedButton) {
     case "템플릿":
-      bottomContent = <Template />;
+      bottomContent = (
+        <Template changeFrameImage={changeFrameImage} frameImage={frameImage} />
+      );
       break;
     case "스티커":
-      bottomContent = <Sticker onStickerDrag={handleStickerDrag} />;
+      bottomContent = <Sticker handleStickerSelect={handleStickerSelect} />;
       break;
     case "배경":
       bottomContent = (
@@ -255,6 +259,8 @@ const MakeFrame = () => {
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
+                    width: `${stickerSize}px`,
+                    height: `${stickerSize}px`,
                   }}
                 />
               )}
