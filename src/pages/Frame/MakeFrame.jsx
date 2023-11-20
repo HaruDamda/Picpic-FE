@@ -50,7 +50,7 @@ const MakeFrame = () => {
   const [selectedBrushSize, setSelectedBrushSize] = useState("medium");
   const [selectedColor, setSelectedColor] = useState("#000000");
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [stickerPositions, setStickerPositions] = useState([]);
+  const [stickerPositionsitions, setStickerPositionsitions] = useState([]);
   const [frameImage, setFrameImage] = useState(framebase);
   const [actions, setActions] = useState([]);
   const [uploadedSticker, setUploadedSticker] = useState(null);
@@ -79,9 +79,9 @@ const MakeFrame = () => {
 
   // Sticker에서 전달된 스티커 위치 정보를 받는 함수
   const handleStickerDrag = ({ index, x, y }) => {
-    const newStickerPositions = [...stickerPositions];
-    newStickerPositions[index] = { x, y };
-    setStickerPositions(newStickerPositions);
+    const newStickerPositionsitions = [...stickerPositionsitions];
+    newStickerPositionsitions[index] = { x, y };
+    setStickerPositionsitions(newStickerPositionsitions);
   };
 
   // UploadedImage와 스티커들을 합성하여 보여주는 함수

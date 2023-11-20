@@ -1,209 +1,181 @@
-body {
-  width: 100vw;;
+.wrapper {
+  width: 100vw;
   height: 100vh;
   overflow-x: hidden;
-  overscroll-behavior: none;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.LoginForm {
-  width: 100vw;;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.LoginBox {
+.section1 {
   width: 100vw;
+  height: 12vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  /* max-height: calc(100vh - 80px); */
-  background-color: #1c5448;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: white;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.06);
+  p {
+      font-family: Pretendard;
+    margin-left: 18px;
+    margin-top: 22px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+    text-align: start;
+  }
 }
 
-.LOGO {
-  margin: 0 auto;
-  align-items: center;
-  margin-top: 60px;
+.section2 {
+  height: 58vh;
+  background-color: #DCF2FF;
+  img {
+    height: 58vh;
+    width: auto;
+  }
 }
 
-.subtitle {
-  color: #888;
-  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-  text-align: center;
-  margin: 30px auto;
-  font-size: 15px;
-}
-
-// .loginTitle{
-//   margin-bottom: 30px;
-// }
-
-.emailInputBox {
-  width: 80%;
-  height: 50px;
-  padding: 0px 12px;
-  outline: none;
-  background-color: transparent;
-  border: 1px solid #e1e2e3;
-  border-radius: 5px;
-  margin: 0px auto 10px auto;
-  font-size: 14px;
-  color: #333;
-}
-.emailInputBox1 {
-  width: 80%;
-  height: 50px;
-  padding: 0px 12px;
-  outline: none;
-  background-color: transparent;
-  border: 1px solid #fe415c;
-  border-radius: 5px;
-  margin: 0px auto 10px auto;
-  font-size: 14px;
-  color: #333;
-}
-
-.emailInputBox:focus {
-  border: 1px solid #009EFF;
-}
-
-/* .submitBtn {
-  cursor: default;
-  border: none;
-  background-color: #f2f4f7;
-  color: #ccc;
-} */
-
-.submitBtn {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  width: 87%;
-  height: 54px;
-  min-height: 50px;
-  border-radius: 26px;
-  border: none;
-  font-size: 16px;
-  color: white;
-  cursor: pointer;
-  margin: 20px auto;
-  background-color: #009EFF;  
-}
-
-.unactiveBtn {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  width: 87%;
-  height: 54px;
-  min-height: 50px;
-  border-radius: 26px;
-  border: none;
-  font-size: 16px;
-  color: #ccc;
-  cursor: none;
-  margin: 20px auto;
-  background-color: #f2f4f7;
-}
-
-.warning {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #fe415c;
-  width: 86%;
-  text-align: left;
-  font-size: 12px;
-  margin-top: -5px;
-}
-
-.nowarning {
-  display: none;
-}
-
-.findBtn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin: 5px auto;
-}
-
-.findBtn > p {
-  margin-bottom: 0;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-}
-
-.forgotten {
-  color: #767676;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 0.0145em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 14px;
-}
-
-.chevron {
-  vertical-align: text-bottom;
-  margin-left: 4px;
-  opacity: 0.5;
-}
-
-.liner {
-  width: 380px;
-  border: none;
-  border-bottom: 1px solid #e1e2e3;
-  margin-top: 30px;
-}
-
-.partSection {
-  margin: 30px auto 15px auto;
+.section3 {
+  height: 21vh;
   display: flex;
   flex-direction: row;
-  -webkit-box-pack: center;
+  align-items: center;
   justify-content: center;
-  .terms {
-    margin-right: 12px;
-    color: #383838;
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 0.0192em;
-    text-align: center;
-    font-weight: 600;
+  background-color: white;
+  :nth-child(1) {
+    margin-right: 72px;
   }
-  .policy {
-    color: #383838;
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 0.0192em;
-    text-align: center;
-    font-weight: 900;
-  }  
+  .buttonBox {
+    width: 72px;
+    height: 89px;
+    display: flex;
+    flex-direction: column;
+    button {
+      width: 72px;
+      height: 72px;
+      border-radius: 15px;
+      background: #F7F7F7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      img {
+        width: 72px;
+        height: 72px;
+        margin: 0;
+      }
+    }
+    p {
+      color: #009EFF;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
 }
 
-.footer {
-  font-size: 10px;
-  line-height: 16px;
-  letter-spacing: 0.025em;
-  text-align: center;
-  font-family: "Pretendard-Regular";
-  color: #888;
-  font-weight: 400;
-  margin-bottom: 40px;
+.navBottom {
+  width: 100vw;
+  img {
+    width: 100vw;
+  }
+}
+
+.modal0 {
+  display: none;
+}
+.modal1 {
+  animation: fadeIn ease-in-out 1s;
+  position: absolute;
+  // box-shadow: 2px 4px 12px #cacaca;
+  z-index: 2;
+  width: 344px;
+  height: 234px;
+  top: 33vh;
+  left: 6vw;
+  background-color: url('../../img/memo-modal.png');
+  background-size: cover; /* 이미지를 화면에 꽉 채우도록 조정 */
+  background-position: center; /* 이미지를 가운데 정렬 */
+  background-repeat: no-repeat; /* 이미지 반복 방지 */
+  .memoModal {
+    width: 88vw;
+    height: auto;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+  }
+  .modalBox {
+    width: 88vw;
+    height: 28vh;
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .emojiBox {
+      width: 66vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: -20px;
+    }
+    textarea {
+      width: 66%;
+      height: 43%;
+      padding: 10px;
+      margin-top: 0px;
+      color: #000;
+      text-align: center;
+      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont, Pretendard, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: normal;
+      outline: none;
+      border: none;
+      border-radius: 14px;
+      white-space: pre-wrap;
+      background-color: #f8f8f8;
+      resize: none;
+      &:focus {
+        border: 1px solid #009EFF;
+      }
+    }
+    .saveBtn {
+      width: 45px;
+      height: 24px;
+      font-size: 18px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background-color: #009EFF;
+      border: none;
+      border-radius: 19px;
+      cursor: pointer;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+}
+
+.modalBG1 {
+  animation: fadeIn2 ease-in-out 1s;
+  z-index: 1;
+  width: 100vw;
+  height: 1100vh;
+  position: absolute;
+  background-color: rgba(0, 40, 64, 0.60);
+  // opacity: 40%;
+  top: 0px;
+  left: 0px;
+}
+.modalBG0 {
+  display: none;
 }
