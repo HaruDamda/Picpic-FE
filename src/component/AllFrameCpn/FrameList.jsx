@@ -42,14 +42,12 @@ const FrameList = () => {
         <ul className={styles.FrameUl}>
           {frames.map((frame, index) => (
             <li key={frame.id} className={styles.FrameItem}>
-              {/* 각 프레임 정보를 두 줄씩 나열 */}
               <div>
                 <img src={frame} alt="frame" className={styles.FrameImage} />
               </div>
               <div>
                 <p>프레임 ID: {frame.id}</p>
                 <p>프레임 제목: {frame.title}</p>
-                {/* 원하는 다른 프레임 정보를 보여줄 수 있음 */}
               </div>
             </li>
           ))}

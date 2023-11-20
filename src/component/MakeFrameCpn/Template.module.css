@@ -20,26 +20,24 @@
 }
 
 .ListView {
-  display: inline-flex;
+  display: flex;
   height: 160px;
   padding: 15px 0px 15px 18px;
   flex-direction: row;
-  gap: 18px;
+  gap: 6px;
 }
 
-.ListView span {
+.ListView button {
+  background: #ffffff;
+  border: none;
+}
+
+.ListView button img {
   width: 72px;
-  height: 130px;
-  border-radius: 10px;
-  background: #d9d9d9;
+  height: 160px;
+  display: block;
 }
 
 button {
   outline: none;
-}
-
-button:hover {
-  outline: none;
-  color: #009eff;
-  font-weight: 600;
 }

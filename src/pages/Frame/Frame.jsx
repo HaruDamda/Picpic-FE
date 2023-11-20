@@ -50,15 +50,6 @@ const Frame = () => {
 
   return (
     <div className={styles.Frame}>
-      <animated.div
-        {...bindLogoPos()}
-        style={{
-          /*position: "relative", top: logoPos.y, left: logoPos.x*/ x: logoPos.x,
-          y: logoPos.y,
-        }}
-      >
-        <img src={framelist} className="home" alt="home"></img>
-      </animated.div>
       <div className={styles.Top}>
         <span>전체 프레임</span>
         <button className={styles.mylistBtn}>

@@ -1,9 +1,14 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
 .MakeFrame {
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   background: #ffffff;
   display: flex;
-  flex-direction: center;
+  flex-direction: column;
   justify-content: center;
   margin: 0;
 }
@@ -14,7 +19,7 @@
 }
 
 .Top {
-  width: 390px;
+  width: 100vw;
   height: 86px;
   display: flex;
   flex-direction: row;
@@ -49,7 +54,7 @@
 }
 
 .Middle {
-  width: 390px;
+  width: 100vw;
   height: 480px;
   display: flex;
   flex-direction: column;
@@ -61,7 +66,7 @@
 
 .FrameImg {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -75,6 +80,16 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+}
+
+.UploadedSticker {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .BrushSize {
@@ -115,8 +130,9 @@
 }
 
 .Frame img {
-  width: 144px;
-  height: 430px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -228,10 +244,4 @@
 .ListBottom button img {
   width: 24px;
   height: 24px;
-}
-
-button:hover {
-  outline: none;
-  color: #009eff;
-  font-weight: 600;
 }
