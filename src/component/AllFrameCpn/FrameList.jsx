@@ -14,12 +14,12 @@ const FrameList = () => {
     async function fetchFrames() {
       try {
         const apiURL =
-          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/get/frame";
+          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/frameList";
 
         // 토큰을 헤더에 추가하여 이미지 리스트 요청
         const res = await axios.get(apiURL, {
           headers: {
-            Authorization: accessToken,
+            Authorization: `Bearer ${accessToken}`,
           },
         });
 
