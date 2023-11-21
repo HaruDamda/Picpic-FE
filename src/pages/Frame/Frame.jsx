@@ -40,9 +40,6 @@ const Frame = () => {
     case "포토북":
       middleContent = "dd";
       break;
-    case "마이":
-      middleContent = "dd";
-      break;
     default:
       middleContent = "dd";
       break;
@@ -66,10 +63,6 @@ const Frame = () => {
           <button onClick={() => handleButtonClick("포토북")}>
             <img src={book} alt="book"></img>
             포토북
-          </button>
-          <button onClick={() => handleButtonClick("마이")}>
-            <img src={person} alt="person"></img>
-            마이
           </button>
         </div>
       </div>

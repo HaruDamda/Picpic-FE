@@ -13,12 +13,7 @@ const Template = ({ changeFrameImage }) => {
   return (
     <div className={styles.Bottom}>
       <div className={styles.ListTop}>
-        <button>테마</button>
-        <button>테마</button>
-        <button>테마</button>
-        <button>테마</button>
-        <button>테마</button>
-        <button>테마</button>
+        <button>테마 for.. Beta</button>
       </div>
       <div className={styles.ListView}>
         <button onClick={() => handleFrameButtonClick(template0)}>
