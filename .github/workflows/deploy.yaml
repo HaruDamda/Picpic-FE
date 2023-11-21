@@ -29,7 +29,7 @@ jobs:
         run: npm run build
 
       - name: Transfer to S3 for serving static
-        uses: jakejarvis/s3-sync-action@master
+        uses: picpic/picpic-bucket@main
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
