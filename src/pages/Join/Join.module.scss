@@ -1,56 +1,273 @@
-$base: 16px;
-$color: #383838;
-$blue: #6ab5ff;
+// $base: 16px;
+// $color: #383838;
+// $blue: #6ab5ff;
 
+// .loginContainer {
+//   width: 100vw;
+//   padding: 30px 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .Upper {
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .signUpBox {
+//   max-width: 1200px;
+//   width: 100%;
+//   margin: auto auto;
+//   display: flex;
+//   position: relative;
+//   /* align-items: flex-end; */
+//   justify-items: center;
+//   overflow: auto;
+//   flex-direction: column;
+//   //   max-height: calc(100vh - 80px);
+//   background-color: white;
+//   border: 1px solid #e1e2e3;
+//   border-radius: 5px;
+//   padding: 20px;
+//   span {
+//     margin: 10px auto;
+//   }
+//   h4 {
+//     font-size: 20px;
+//     letter-spacing: -0.023em;
+//     text-align: center;
+//     font-weight: 700;
+//     line-height: 32px;
+//     display: block;
+//     margin: 20px auto;
+//   }
+//   h5 {
+//     margin: 20px auto 5px 384px;
+//     font-weight: 600;
+//     font-size: 14px;
+//     color: #888;
+//   }
+//   .emailInputBox, .emailInputBox1 {
+//     width: 316px;
+//     height: 50px;
+//     min-height: 50px;
+//     padding: 0px 12px;
+//     outline: none;
+//     background-color: transparent;
+//     border: 1px solid #e1e2e3;
+//     border-radius: 5px;
+//     margin: 8px auto;
+//     font-size: 16px;
+//     color: #333;
+//   }
+//   .emailCheck {
+//     cursor: pointer;
+//     display: inline-block;
+//     margin: 0 0 8px 12px;
+//     outline: none;
+//     border: 1px solid #e1e2e3;
+//     font-size: 12px;
+//     border-radius: 5px;
+//     color: #333;
+//     padding: 0px 12px;
+//     height: 52px;
+//     position: relative;
+//     bottom: 2px;
+//   }
+//   .inputBox, .inputBox1, .ageScroll {
+//     width: 400px;
+//     height: 50px;
+//     min-height: 50px;
+//     padding: 0px 12px;
+//     outline: none;
+//     background-color: transparent;
+//     border: 1px solid #e1e2e3;
+//     border-radius: 5px;
+//     margin: 8px auto;
+//     font-size: 16px;
+//     color: #333;
+//   }
+//   .emailInputBox1, .inputBox1 {
+//     border: 1px solid #fe415c;
+//   }
+//   .emailCheck + span, .inputBox1 + span {
+//     width: 432px;
+//     color: #fe415c;
+//     display: block;
+//     text-align: left;
+//     font-size: 12px;
+//     line-height: 16px;
+//     margin-bottom: 8px;
+//     margin-top: 0px;
+//   }
+//   .ageScroll {
+//     width: 426px;
+//     padding: 0 8px;
+//     color: #666;
+//     margin-bottom: 20px;
+//   }
+// }
+// .agreeForm1 {
+//   margin: 4px auto;
+//   width: 430px;
+//   .allWrapper {
+//     width: 100%;
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+//     margin: 0;
+//     h5 {
+//       margin: 10px 0px 12px 0px;
+//       font-weight: 600;
+//       font-size: 14px;
+//       color: #333;
+//       display: inline-block;
+//       margin-left: 10px;
+//     }
+//     input {
+//       cursor: pointer;
+//     }
+//   }
+//   hr {
+//     color: #888;
+//     opacity: 0.4;
+//     margin: 10px 0px 5px 0px;
+//   }
+// }
+// .agreeForm2 {
+//   margin: 4px auto;
+//   width: 430px;
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   h5 {
+//     margin: 10px 0px 8px 0px;
+//     font-weight: 400;
+//     font-size: 14px;
+//     margin-left: 10px;
+//     color: #333;
+//     display: inline-block;
+//   }
+//   input {
+//     cursor: pointer;
+//     position: relative;
+//     top: 2px;
+//   }
+// }
+// .closeBtn {
+//   position: absolute;
+//   left: 60px;
+//   top: 54px;
+//   background-color: transparent;
+//   border: none;
+//   font-size: 18px;
+//   cursor: pointer;
+// }
+
+// .signUpBtn1 {
+//   width: 436px;
+//   font-weight: 600;
+//   font-size: 16px;
+//   height: 54px;
+//   min-height: 50px;
+//   border-radius: 26px;
+//   border: none;
+//   font-size: 16px;
+//   color: white;
+//   cursor: pointer;
+//   margin: 30px auto;
+//   background-color: #6ab5ff;
+// }
+// .signUpBtn0 {
+//   font-weight: 600;
+//   width: 436px;
+//   font-size: 16px;
+//   height: 54px;
+//   min-height: 50px;
+//   border-radius: 26px;
+//   border: none;
+//   font-size: 16px;
+//   color: white;
+//   margin: 30px auto;
+//   background-color: #eaeaea;
+// }
+
+
+/* 모바일 뷰 */
 .loginContainer {
   width: 100vw;
-  padding: 30px 0;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.Upper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .signUpBox {
-  max-width: 1200px;
-  width: 100%;
-  margin: auto auto;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  position: relative;
-  /* align-items: flex-end; */
-  justify-items: center;
-  overflow: auto;
   flex-direction: column;
-  //   max-height: calc(100vh - 80px);
-  background-color: white;
-  border: 1px solid #e1e2e3;
-  border-radius: 5px;
-  padding: 20px;
+  align-items: center;
+  justify-items: flex-start;
+  // overflow: auto;
+  flex-direction: column;
+  // max-height: calc(100vh - 80px);
+  background-color: aliceblue;
+  .header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .closeBtn {
+      border: none;
+      background-color: white;
+      color: black;
+      width: 80px;
+      height: 30px;
+      font-size: 14px;
+      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont, Pretendard, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      // margin-left: 20px;
+    }
+    h4 {
+      font-size: 20px;
+      text-align: center;
+      font-weight: 700;
+      margin: 20px auto;
+    }
+    div {
+      width: 80px;
+      height: 30px;
+    }
+  }
+}
+.body {
   span {
     margin: 10px auto;
   }
-  h4 {
-    font-size: 20px;
-    letter-spacing: -0.023em;
-    text-align: center;
-    font-weight: 700;
-    line-height: 32px;
-    display: block;
-    margin: 20px auto;
-  }
   h5 {
-    margin: 20px auto 5px 384px;
+    width: 100vw;
+    text-align: left;
+    margin: 10px auto 0 11vw;
     font-weight: 600;
     font-size: 14px;
     color: #888;
   }
+  .emailWrapper {
+    margin: 0;
+    width: 100vw;
+    background-color: #6ab5ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
   .emailInputBox, .emailInputBox1 {
-    width: 316px;
+    width: 40vw;
     height: 50px;
     min-height: 50px;
     padding: 0px 12px;
@@ -58,26 +275,25 @@ $blue: #6ab5ff;
     background-color: transparent;
     border: 1px solid #e1e2e3;
     border-radius: 5px;
-    margin: 8px auto;
+    // margin: 8px auto;
     font-size: 16px;
     color: #333;
   }
   .emailCheck {
     cursor: pointer;
     display: inline-block;
-    margin: 0 0 8px 12px;
+    // margin: 0 0 8px 12px;
     outline: none;
     border: 1px solid #e1e2e3;
     font-size: 12px;
     border-radius: 5px;
     color: #333;
     padding: 0px 12px;
-    height: 52px;
-    position: relative;
+    height: 50px;
     bottom: 2px;
   }
   .inputBox, .inputBox1, .ageScroll {
-    width: 400px;
+    width: 330px;
     height: 50px;
     min-height: 50px;
     padding: 0px 12px;
@@ -93,7 +309,7 @@ $blue: #6ab5ff;
     border: 1px solid #fe415c;
   }
   .emailCheck + span, .inputBox1 + span {
-    width: 432px;
+    width: 348px;
     color: #fe415c;
     display: block;
     text-align: left;
@@ -103,7 +319,7 @@ $blue: #6ab5ff;
     margin-top: 0px;
   }
   .ageScroll {
-    width: 426px;
+    width: 356px;
     padding: 0 8px;
     color: #666;
     margin-bottom: 20px;
@@ -156,18 +372,8 @@ $blue: #6ab5ff;
     top: 2px;
   }
 }
-.closeBtn {
-  position: absolute;
-  left: 60px;
-  top: 54px;
-  background-color: transparent;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.signUpBtn1 {
-  width: 436px;
+.signUpBtn1, .signUpBtn0 {
+  width: 80vw;
   font-weight: 600;
   font-size: 16px;
   height: 54px;
@@ -181,15 +387,5 @@ $blue: #6ab5ff;
   background-color: #6ab5ff;
 }
 .signUpBtn0 {
-  font-weight: 600;
-  width: 436px;
-  font-size: 16px;
-  height: 54px;
-  min-height: 50px;
-  border-radius: 26px;
-  border: none;
-  font-size: 16px;
-  color: white;
-  margin: 30px auto;
   background-color: #eaeaea;
 }
