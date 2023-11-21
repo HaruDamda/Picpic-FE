@@ -39,11 +39,17 @@ ul {
 }
 
 .FrameUl {
+  height: 100%;
+  overflow-y: scroll;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap; /* 너비를 넘어가면 다음 줄로 넘어감 */
+}
+
+.FrameUl::-webkit-scrollbar {
+  display: none;
 }
 
 .FrameItem {
