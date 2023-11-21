@@ -9,6 +9,7 @@ import { accessTokenAtom } from "../../store/jotaiAtoms";
 const FrameList = () => {
   const [frames, setFrames] = useState([]);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+
   useEffect(() => {
     // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
     if (accessToken) {
@@ -22,7 +23,7 @@ const FrameList = () => {
       // API 요청 보내기
       axios
         .get(
-          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/frameList",
+          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/list",
           config
         )
         .then((res) => {
@@ -43,19 +44,27 @@ const FrameList = () => {
         <button className={styles.newFrame}>새 프레임 만들기</button>
       </Link>
       <div className={styles.FrameScroll}>
-        <ul className={styles.FrameUl}>
-          {frames.map((frame, index) => (
-            <li key={frame.id} className={styles.FrameItem}>
-              <div>
-                <img src={frame} alt="frame" className={styles.FrameImage} />
-              </div>
-              <div>
-                <p>프레임 ID: {frame.id}</p>
-                <p>프레임 제목: {frame.title}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {frames.length === null ? ( // frames 배열이 비어 있는 경우
+          <div className={styles.InfoMsg}>
+            <h3>새 프레임을 추가해주세요</h3>
+          </div>
+        ) : (
+          // frames 배열에 프레임이 있는 경우
+          <ul className={styles.FrameUl}>
+            {frames.map((frame, index) => (
+              <li key={frame.id} className={styles.FrameItem}>
+                <button>
+                  <img
+                    key={index}
+                    src={frame}
+                    alt="frame"
+                    className={styles.FrameImage}
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

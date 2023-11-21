@@ -5,7 +5,7 @@
 
 .ListTop {
   height: 40px;
-  padding: 14px 14px 14px 18px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -22,17 +22,17 @@
 .ListView {
   width: 100%;
   height: 160px;
-  padding: 15px 0px 15px 18px;
+  padding: 10px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 18px;
+  gap: 30px;
 }
 
 .FirstLine {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .FirstLine button {
@@ -60,7 +60,7 @@
 .SecondLine {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .SecondLine button {

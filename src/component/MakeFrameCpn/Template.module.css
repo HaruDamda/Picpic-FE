@@ -15,8 +15,11 @@
 }
 
 .ListTop button {
+  width: 100%;
   background-color: #ffffff;
   border: none;
+  display: flex;
+  justify-content: center;
 }
 
 .ListView {

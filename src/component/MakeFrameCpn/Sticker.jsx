@@ -16,7 +16,7 @@ const Sticker = ({ handleStickerSelect }) => {
   const fetchStickers = async (theme) => {
     try {
       const res = await axios.get(
-        `http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/get/sticker/${theme}`
+        `http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/stickerList/${theme}`
       );
       const imageStickers = res.data.filter((url, index) => index !== 0);
       console.log("이미지 URL 리스트:", imageStickers);
