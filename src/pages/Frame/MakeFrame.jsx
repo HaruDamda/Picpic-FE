@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { saveAs } from "file-saver";
 import home from "../../img/home.png";
 import save from "../../img/save.png";
 import template from "../../img/template.png";
@@ -125,72 +126,39 @@ const MakeFrame = () => {
   const handleSaveClick = () => {
     // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
     if (accessToken) {
-      // axios 요청 설정
-      const config = {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
-        },
-      };
+      const formData = new FormData();
 
       const frameElement = document.querySelector(`.${styles.Frame}`);
       html2canvas(frameElement).then((canvas) => {
-        const imageData = canvas.toDataURL("image/png");
+        canvas.toBlob((blob) => {
+          formData.append("image", blob, "frame.png");
 
-        axios
-          .post(
-            "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
-            {
-              image: imageData,
+          // axios 요청 설정
+          const config = {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
             },
-            config
-          )
-          .then((res) => {
-            console.log("프레임 저장 API 응답:", res.data);
-            // 성공적으로 데이터를 받아온 경우
-            // 받아온 데이터로 frames 상태 업데이트
-          })
-          .catch((err) => {
-            // 오류 처리
-            console.error("API 요청 중 오류 발생:", err);
-          });
+          };
+          axios
+            .post(
+              "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
+              formData,
+              config
+            )
+            .then((res) => {
+              console.log("프레임 저장 API 응답:", res.data);
+              const updatedFrames = [...frames, res.data]; // 새로운 데이터 추가
+              setFrames(updatedFrames);
+            })
+            .catch((err) => {
+              // 오류 처리
+              console.error("API 요청 중 오류 발생:", err);
+            });
+        }, "image/png");
       });
     }
   };
-
-  useEffect(() => {
-    // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
-    if (accessToken) {
-      // axios 요청 설정
-      const config = {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
-        },
-      };
-
-      const frameElement = document.querySelector(`.${styles.Frame}`);
-      html2canvas(frameElement).then((canvas) => {
-        const imageData = canvas.toDataURL("image/png");
-
-        axios
-          .post(
-            "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/save",
-            {
-              image: imageData,
-            },
-            config
-          )
-          .then((res) => {
-            console.log("프레임 저장 API 응답:", res.data);
-            // 성공적으로 데이터를 받아온 경우
-            // 받아온 데이터로 frames 상태 업데이트
-          })
-          .catch((err) => {
-            // 오류 처리
-            console.error("API 요청 중 오류 발생:", err);
-          });
-      });
-    }
-  }, [accessToken]);
 
   const handleUploadedImage = (imageData) => {
     setUploadedImage(imageData);
@@ -261,13 +229,15 @@ const MakeFrame = () => {
     <div className={styles.MakeFrame}>
       <div className={styles.MakeFramebox}>
         <div className={styles.Top}>
-          <Link to="/frame">
+          <Link to="/">
             <button className={styles.ImgBtn}>
               <img src={home} alt="logo" />
             </button>
           </Link>
           <button className={styles.TextBtn}>가져오기</button>
-          <button className={styles.TextBtn}>프레임 보기</button>
+          <Link to="/frame">
+            <button className={styles.TextBtn}>프레임 보기</button>
+          </Link>
           <button className={styles.ImgBtn} onClick={handleSaveClick}>
             <img src={save} alt="save" />
           </button>

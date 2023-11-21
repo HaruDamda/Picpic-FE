@@ -32,6 +32,7 @@
 .ListView::-webkit-scrollbar {
   width: 12px; /* 스크롤 바의 너비 */
   height: 12px; /* 스크롤 바의 높이 */
+  display: none;
 }
 
 .ListView::-webkit-scrollbar-thumb {
