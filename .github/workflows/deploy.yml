@@ -2,36 +2,26 @@ name: Auto Deploy after push
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@master
+      - name: git checkout
+        uses: actions/checkout@v3
 
-      - name: Cache node modules # node modules 캐싱
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-master-build-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
-      - name: Install Dependencies
+      - name: npm install
         run: npm install
 
-      - name: Build
+      - name: npm build
         run: npm run build
         env:
-          CI: ""
+          CI: false
 
-      - name: Deploy
+      - name: deploy s3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync --region ap-northeast-2 ./dist s3://picpic-bucket
+          aws s3 sync --delete --region ap-northeast-2 ./dist s3://picpic-bucket
