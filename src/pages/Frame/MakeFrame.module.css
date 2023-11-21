@@ -4,7 +4,7 @@ body {
 }
 
 .MakeFrame {
-  width: 100vw;
+  width: 390px;
   height: calc(var(--vh, 1vh) * 100);
   background: #ffffff;
   display: flex;
@@ -19,7 +19,6 @@ body {
 }
 
 .Top {
-  width: 100vw;
   height: 86px;
   display: flex;
   flex-direction: row;
@@ -42,7 +41,6 @@ body {
   font-size: 12px;
   font-weight: 400;
   border-radius: 19px;
-  margin: 0px 9px;
   border: none;
 }
 
@@ -54,7 +52,7 @@ body {
 }
 
 .Middle {
-  width: 100vw;
+  width: 390px;
   height: 480px;
   display: flex;
   flex-direction: column;
@@ -102,6 +100,10 @@ body {
   gap: 10px;
 }
 
+.SizeSelector {
+  display: inline-flex;
+}
+
 .BrushSize button {
   border-radius: 100%;
   border: none;
@@ -137,7 +139,6 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  gap: 7px;
   margin: 0 auto;
   position: absolute;
   top: 0;
@@ -197,25 +198,6 @@ body {
   align-items: center;
   font-size: 10px;
   font-weight: 400;
-}
-
-.ListTop button {
-  background-color: #ffffff;
-}
-
-.ListView {
-  display: inline-flex;
-  height: 160px;
-  padding: 15px 0px 15px 18px;
-  flex-direction: row;
-  gap: 18px;
-}
-
-.ListView span {
-  width: 72px;
-  height: 130px;
-  border-radius: 10px;
-  background: #d9d9d9;
 }
 
 .ListBottom {

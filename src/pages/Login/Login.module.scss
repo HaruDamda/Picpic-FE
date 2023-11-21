@@ -298,11 +298,9 @@
 //   font-weight: 400;
 // }
 
-
 /* 모바일 뷰 */
 body {
-  width: 100vw;;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow-x: hidden;
   overscroll-behavior: none;
   margin: 0;
@@ -312,16 +310,15 @@ body {
 }
 
 .LoginForm {
-  width: 100vw;;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin: 0;
 }
 
 .LoginBox {
-  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -375,7 +372,7 @@ body {
 }
 
 .emailInputBox:focus {
-  border: 1px solid #009EFF;
+  border: 1px solid #009eff;
 }
 
 /* .submitBtn {
@@ -399,7 +396,7 @@ body {
   color: white;
   cursor: pointer;
   margin: 20px auto;
-  background-color: #009EFF;  
+  background-color: #009eff;
 }
 
 .unactiveBtn {
@@ -494,7 +491,7 @@ body {
     letter-spacing: 0.0192em;
     text-align: center;
     font-weight: 900;
-  }  
+  }
 }
 
 .footer {

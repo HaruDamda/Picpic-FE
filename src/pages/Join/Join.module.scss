@@ -194,7 +194,6 @@
 //   background-color: #eaeaea;
 // }
 
-
 /* 모바일 뷰 */
 .loginContainer {
   width: 100vw;
@@ -229,8 +228,9 @@
       width: 80px;
       height: 30px;
       font-size: 14px;
-      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont, Pretendard, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont,
+        Pretendard, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
       // margin-left: 20px;
     }
     h4 {
@@ -272,7 +272,8 @@
     align-items: center;
     justify-content: space-between;
   }
-  .emailInputBox, .emailInputBox1 {
+  .emailInputBox,
+  .emailInputBox1 {
     width: 60vw;
     height: 50px;
     min-height: 50px;
@@ -318,7 +319,8 @@
     font-size: 16px;
     color: #333;
   }
-  .emailInputBox1, .inputBox1 {
+  .emailInputBox1,
+  .inputBox1 {
     border: 1px solid #fe415c;
   }
   .emailWrapper + span, .inputBox1 + span {
@@ -379,7 +381,8 @@
     top: 2px;
   }
 }
-.signUpBtn1, .signUpBtn0 {
+.signUpBtn1,
+.signUpBtn0 {
   width: 80vw;
   font-weight: 600;
   font-size: 16px;

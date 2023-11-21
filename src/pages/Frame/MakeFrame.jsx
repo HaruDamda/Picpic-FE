@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import home from "../../img/home.png";
@@ -18,6 +18,9 @@ import Background from "../../component/MakeFrameCpn/Background";
 import Brush from "../../component/MakeFrameCpn/Brush";
 import AddPhoto from "../../component/MakeFrameCpn/AddPhoto";
 import html2canvas from "html2canvas";
+import axios from "axios";
+import { useAtom } from "jotai";
+import { accessTokenAtom } from "../../store/jotaiAtoms";
 
 const BrushSizeSelector = ({ selectedBrushSize, setSelectedBrushSize }) => {
   return (
@@ -56,6 +59,7 @@ const MakeFrame = () => {
   const [uploadedSticker, setUploadedSticker] = useState(null);
   const [stickerSize, setStickerSize] = useState(100);
   const [selectedSticker, setSelectedSticker] = useState(null);
+  const [accessToken] = useAtom(accessTokenAtom);
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
@@ -119,43 +123,78 @@ const MakeFrame = () => {
   };
 
   const handleSaveClick = () => {
-    const frameElement = document.querySelector(`.${styles.Frame}`);
+    // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
+    if (accessToken) {
+      // axios 요청 설정
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
+        },
+      };
 
-    // Frame 클래스의 이미지를 캡처
-    html2canvas(frameElement).then((canvas) => {
-      // 캔버스를 이미지 데이터 URL로 변환
-      const imageData = canvas.toDataURL("image/png");
+      const frameElement = document.querySelector(`.${styles.Frame}`);
+      html2canvas(frameElement).then((canvas) => {
+        const imageData = canvas.toDataURL("image/png");
 
-      // 서버로 이미지 전송
-      sendImageToServer(imageData);
-    });
-  };
-
-  const sendImageToServer = (imageData) => {
-    const apiUrl =
-      "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/save";
-
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer ${accessToken}", // 여기에 토큰을 넣어주세요.
-      },
-      body: JSON.stringify({
-        image: imageData,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("이미지 저장 성공:", data);
-      })
-      .catch((err) => {
-        console.error("이미지 저장 실패:", err);
+        axios
+          .post(
+            "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
+            {
+              image: imageData,
+            },
+            config
+          )
+          .then((res) => {
+            console.log("프레임 저장 API 응답:", res.data);
+            // 성공적으로 데이터를 받아온 경우
+            // 받아온 데이터로 frames 상태 업데이트
+          })
+          .catch((err) => {
+            // 오류 처리
+            console.error("API 요청 중 오류 발생:", err);
+          });
       });
+    }
   };
+
+  useEffect(() => {
+    // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
+    if (accessToken) {
+      // axios 요청 설정
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
+        },
+      };
+
+      const frameElement = document.querySelector(`.${styles.Frame}`);
+      html2canvas(frameElement).then((canvas) => {
+        const imageData = canvas.toDataURL("image/png");
+
+        axios
+          .post(
+            "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame/save",
+            {
+              image: imageData,
+            },
+            config
+          )
+          .then((res) => {
+            console.log("프레임 저장 API 응답:", res.data);
+            // 성공적으로 데이터를 받아온 경우
+            // 받아온 데이터로 frames 상태 업데이트
+          })
+          .catch((err) => {
+            // 오류 처리
+            console.error("API 요청 중 오류 발생:", err);
+          });
+      });
+    }
+  }, [accessToken]);
 
   const handleUploadedImage = (imageData) => {
     setUploadedImage(imageData);
+    console.log(uploadedImage);
   };
 
   let bottomContent;
