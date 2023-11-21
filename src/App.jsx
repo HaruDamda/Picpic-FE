@@ -13,6 +13,9 @@ import {
 } from "react-device-detect";
 import FrameList from "./component/AllFrameCpn/FrameList";
 import PhotoSelect from "./pages/Photobook/PhotoSelect";
+// import { useAtom } from "jotai";
+// import axios from "axios";
+// import { accessTokenAtom, setAccessToken } from "./store/jotaiAtoms";
 
 function App() {
   function setScreenSize() {

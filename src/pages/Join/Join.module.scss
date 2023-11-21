@@ -201,6 +201,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 .signUpBox {
@@ -213,11 +214,10 @@
   // overflow: auto;
   flex-direction: column;
   // max-height: calc(100vh - 80px);
-  background-color: aliceblue;
   .header {
     width: 100vw;
     height: 10vh;
-    background-color: #eaeaea;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -246,21 +246,27 @@
   }
 }
 .body {
+  width: 86vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  
   span {
     margin: 10px auto;
   }
   h5 {
-    width: 100vw;
+    width: 86vw;
     text-align: left;
-    margin: 10px auto 0 11vw;
+    margin-top: 10px;
+    margin-bottom: 0;
     font-weight: 600;
     font-size: 14px;
     color: #888;
   }
   .emailWrapper {
     margin: 0;
-    width: 100vw;
-    background-color: #6ab5ff;
+    width: 86vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -268,38 +274,45 @@
   }
   .emailInputBox,
   .emailInputBox1 {
-    width: 40vw;
+    width: 57vw;
     height: 50px;
     min-height: 50px;
-    padding: 0px 12px;
+    padding: 0px 3vw;
     outline: none;
     background-color: transparent;
     border: 1px solid #e1e2e3;
     border-radius: 5px;
-    // margin: 8px auto;
+    margin: 8px 0;
     font-size: 16px;
     color: #333;
   }
   .emailCheck {
     cursor: pointer;
     display: inline-block;
-    // margin: 0 0 8px 12px;
+    margin: 0;
     outline: none;
     border: 1px solid #e1e2e3;
     font-size: 12px;
     border-radius: 5px;
     color: #333;
-    padding: 0px 12px;
+    background-color: #eaeaea;
+    // padding: 0px 3vw;
     height: 50px;
-    bottom: 2px;
+    width: 20vw;
   }
-  .inputBox,
-  .inputBox1,
-  .ageScroll {
-    width: 330px;
+  .boxWrapper {
+    margin: 0;
+    width: 86vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .inputBox, .inputBox1 {
+    width: 79.5vw;
     height: 50px;
     min-height: 50px;
-    padding: 0px 12px;
+    padding: 0px 3vw;
     outline: none;
     background-color: transparent;
     border: 1px solid #e1e2e3;
@@ -312,9 +325,8 @@
   .inputBox1 {
     border: 1px solid #fe415c;
   }
-  .emailCheck + span,
-  .inputBox1 + span {
-    width: 348px;
+  .emailWrapper + span, .inputBox1 + span {
+    width: 86vw;
     color: #fe415c;
     display: block;
     text-align: left;
@@ -323,16 +335,10 @@
     margin-bottom: 8px;
     margin-top: 0px;
   }
-  .ageScroll {
-    width: 356px;
-    padding: 0 8px;
-    color: #666;
-    margin-bottom: 20px;
-  }
 }
 .agreeForm1 {
   margin: 4px auto;
-  width: 430px;
+  width: 86vw;
   .allWrapper {
     width: 100%;
     display: flex;
@@ -359,7 +365,7 @@
 }
 .agreeForm2 {
   margin: 4px auto;
-  width: 430px;
+  width: 86vw;
   display: flex;
   justify-content: flex-start;
   align-items: center;

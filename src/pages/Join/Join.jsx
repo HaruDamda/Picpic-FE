@@ -1,5 +1,3 @@
-"use client";
-
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./Join.module.scss";
@@ -11,7 +9,6 @@ export default function SignUp() {
   const initialState = {
     email: "",
     nickname: "",
-    birth: "",
     password: "",
     passwordConfirm: "",
   };
@@ -23,7 +20,6 @@ export default function SignUp() {
   const [errorMessages, setErrorMessages] = useState({
     email: "",
     nickname: "",
-    birth: "",
     password: "",
     passwordConfirm: "",
   });
@@ -32,7 +28,6 @@ export default function SignUp() {
   const [isValid, setIsValid] = useState({
     email: false,
     nickname: false,
-    birth: false,
     password: false,
     passwordConfirm: false,
   });
@@ -193,7 +188,7 @@ export default function SignUp() {
               <span className={`message error`}>{errorMessages.email}</span>
             )}
           </div>
-          <div>
+          <div className={styles.boxWrapper}>
             <h5>닉네임</h5>
             <input
               className={
@@ -209,7 +204,7 @@ export default function SignUp() {
               <span className={`message error`}>{errorMessages.nickname}</span>
             )}
           </div>
-          <div>
+          <div className={styles.boxWrapper}>
             <h5>비밀번호</h5>
             <input
               name="password"
@@ -240,23 +235,7 @@ export default function SignUp() {
               </span>
             )}
           </div>
-          <div>
-            <h5>나이</h5>
-            <select
-              className={styles.ageScroll}
-              value={formData.birth || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, birth: Number(e.target.value) })
-              }
-            >
-              <option value="">출생년도 입력(선택)</option>
-              {[...Array(87)].map((_, index) => (
-                <option key={index} value={2004 - index}>
-                  {2004 - index}
-                </option>
-              ))}
-            </select>
-          </div>
+
           <div className={styles.agreeForm1}>
             <div className={styles.allWrapper}>
               <input
