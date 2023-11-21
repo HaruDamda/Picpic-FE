@@ -1,6 +1,6 @@
 .Bottom {
   width: 390px;
-  height: 270px;
+  height: 204px;
 }
 
 .ListTop {
@@ -24,8 +24,8 @@
 
 .ListView {
   display: flex;
-  height: 160px;
-  padding: 15px 0px 15px 18px;
+  height: 100px;
+  padding: 0px 0px 0px 18px;
   flex-direction: row;
   gap: 6px;
 }
@@ -37,7 +37,7 @@
 
 .ListView button img {
   width: 72px;
-  height: 160px;
+  height: 100px;
   display: block;
 }
 
