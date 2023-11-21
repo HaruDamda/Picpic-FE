@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // import { getAllFrames } from "../../apis/getFrame";
 import { useAtom } from "jotai";
-import { accessTokenAtom } from "../../store/jotaiAtoms";
+import { accessTokenAtom, setAccessToken } from "../../store/jotaiAtoms";
 
 const FrameList = () => {
   const [frames, setFrames] = useState([]);

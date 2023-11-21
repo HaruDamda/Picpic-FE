@@ -69,6 +69,7 @@ function LoginForm() {
       .then((res) => {
         const accessToken = res.data;
         setAct(accessToken); // 액세스 토큰을 Jotai 상태에 업데이트
+				localStorage.setItem("accessToken", `${accessToken}`);
         router('/framelist');
       })
       .catch((err) => {
