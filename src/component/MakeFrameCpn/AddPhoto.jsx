@@ -27,7 +27,7 @@ const AddPhoto = ({ handleUploadedImage }) => {
     <div className={styles.Bottom}>
       <div className={styles.ListView}>
         <button onClick={handleButtonClick}>
-          <img src={addbutton} alt="addbutton" />
+          <img src={addbutton} alt="addbutton" className={styles.addbutton} />
         </button>
         <input
           type="file"

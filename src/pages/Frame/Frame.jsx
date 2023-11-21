@@ -9,9 +9,7 @@ import framelist from "../../img/framelist.png";
 import styles from "./Frame.module.css";
 import Template from "../../component/MakeFrameCpn/Template";
 import FrameList from "../../component/AllFrameCpn/FrameList";
-import Background from "../../component/MakeFrameCpn/Background";
-import Brush from "../../component/MakeFrameCpn/Brush";
-import AddPhoto from "../../component/MakeFrameCpn/AddPhoto";
+import Photobook from "../Photobook/PhotoSelect";
 import { Link } from "react-router-dom";
 
 const Frame = () => {
@@ -38,10 +36,10 @@ const Frame = () => {
       middleContent = <FrameList />;
       break;
     case "포토북":
-      middleContent = "dd";
+      middleContent = <Photobook />;
       break;
     default:
-      middleContent = "dd";
+      middleContent = <FrameList />;
       break;
   }
 

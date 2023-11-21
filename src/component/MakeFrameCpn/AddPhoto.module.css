@@ -1,6 +1,6 @@
 .Bottom {
   width: 390px;
-  height: 270px;
+  height: 204px;
 }
 
 .ListView {
@@ -32,4 +32,10 @@
 .ListView button:active {
   border: none;
   outline: none;
+}
+
+.addbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
