@@ -23,24 +23,21 @@ export default function Login() {
           <img src={main_logo} alt="main-logo" />
         </button>
       </Link>
-      <button
-        className={styles.loginBtn}
-        onClick={() => router("/login")}
-      >
-        로그인
-      </button>
-      <button
-        className={styles.logoutBtn}
-        onClick={() => logout()}
-      >
-        로그아웃
-      </button>
-      <button
-        className={styles.frameBtn}
-        onClick={() => router("/framelist")}
-      >
-        프레임 만들기
-      </button>
+      <Link to="/login" className={styles.linkBtn_container}>
+        <button className={styles.loginBtn}>
+          로그인
+        </button>
+      </Link>
+      <Link to="/logout" className={styles.linkBtn_container}>
+        <button className={styles.logoutBtn}>
+          로그아웃
+        </button>
+      </Link>
+      <Link to="/framelist" className={styles.linkBtn_container}>
+        <button className={styles.frameBtn}>
+          프레임 만들기
+        </button>
+      </Link>
     </div>
   );
 }
