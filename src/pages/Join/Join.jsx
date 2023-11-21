@@ -5,6 +5,7 @@ import { useState } from "react";
 import styles from "./Join.module.scss";
 // import api from "../../apis/api";
 import { onSignUp } from "../../apis/onSignUp";
+import { emailCheck } from "../../apis/emailCheck";
 
 export default function SignUp() {
   const initialState = {
@@ -156,108 +157,106 @@ export default function SignUp() {
 
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.Upper}>
-        <div className={styles.signUpBox}>
-          <span>
-            <Link href="/login">
-              <button className={styles.closeBtn}>취소</button>
-            </Link>
-            <h4 className={styles.signUpTitle}>회원가입</h4>
-          </span>
-          <h5>이메일</h5>
-          <span>
-            <input
-              name="email"
-              onChange={handleChange}
-              type="email"
-              className={
-                isValid.email || formData.email === ""
-                  ? styles.emailInputBox
-                  : styles.emailInputBox1
-              }
-              placeholder="이메일을 입력해주세요"
-            ></input>
-            <button
-              className={styles.emailCheck}
-              // onClick={() => {
-              //   axios
-              //     .post("api/users/idcheck", { email: formData.email })
-              //     .then(() => {
-              //       alert("사용할 수 있는 이메일입니다.");
-              //     })
-              //     .catch(() => {
-              //       alert("사용할 수 없는 이메일입니다.");
-              //       setFormData({ ...formData, email: "" });
-              //     });
-              // }}
-            >
-              중복확인
-            </button>
+      <div className={styles.signUpBox}>
+        <div className={styles.header}>
+          <Link to="/login">
+            <button className={styles.closeBtn}>취소</button>
+          </Link>
+          <h4>회원가입</h4>
+          <div></div>
+        </div>
+        <div className={styles.body}>
+          <div>
+            <h5>이메일</h5>
+            <div className={styles.emailWrapper}>
+              <input
+                name="email"
+                onChange={handleChange}
+                type="email"
+                className={
+                  isValid.email || formData.email === ""
+                    ? styles.emailInputBox
+                    : styles.emailInputBox1
+                }
+                placeholder="이메일을 입력해주세요"
+              ></input>
+              <button
+                className={styles.emailCheck}
+                onClick={() => {
+                  emailCheck(formData,setFormData);
+                }}
+              >
+                중복확인
+              </button>
+            </div>
             {errorMessages.email && (
               <span className={`message error`}>{errorMessages.email}</span>
             )}
-          </span>
-
-          <h5>닉네임</h5>
-          <input
-            className={
-              isValid.nickname || formData.nickname === ""
-                ? styles.inputBox
-                : styles.inputBox1
-            }
-            onChange={handleChange}
-            name="nickname"
-            placeholder="닉네임을 입력해주세요"
-          ></input>
-          {errorMessages.nickname && (
-            <span className={`message error`}>{errorMessages.nickname}</span>
-          )}
-          <h5>비밀번호</h5>
-          <input
-            name="password"
-            onChange={handleChange}
-            type="password"
-            className={
-              isValid.password || formData.password === ""
-                ? styles.inputBox
-                : styles.inputBox1
-            }
-            placeholder="비밀번호를 입력해주세요"
-          ></input>
-          {errorMessages.password && <span>{errorMessages.password}</span>}
-          <input
-            name="passwordConfirm"
-            onChange={handleChange}
-            type="password"
-            className={
-              isValid.passwordConfirm || formData.passwordConfirm === ""
-                ? styles.inputBox
-                : styles.inputBox1
-            }
-            placeholder="비밀번호를 다시 한번 입력해주세요"
-          ></input>
-          {errorMessages.passwordConfirm && (
-            <span className={`message error`}>
-              {errorMessages.passwordConfirm}
-            </span>
-          )}
-
-          <h5>나이</h5>
-          <select
-            className={styles.ageScroll}
-            value={formData.birth || ""}
-            onChange={(e) =>
-              setFormData({ ...formData, birth: Number(e.target.value) })
-            }
-          >
-            <option value="">출생년도 입력(선택)</option>
-            {[...Array(87)].map((_, index) => (
-              <option key={index} value={2004 - index}>
-                {2004 - index}
-              </option>
-            ))}
-          </select>
-
+          </div>
+          <div>
+            <h5>닉네임</h5>
+            <input
+              className={
+                isValid.nickname || formData.nickname === ""
+                  ? styles.inputBox
+                  : styles.inputBox1
+              }
+              onChange={handleChange}
+              name="nickname"
+              placeholder="닉네임을 입력해주세요"
+            ></input>
+            {errorMessages.nickname && (
+              <span className={`message error`}>{errorMessages.nickname}</span>
+            )}
+          </div>
+          <div>
+            <h5>비밀번호</h5>
+            <input
+              name="password"
+              onChange={handleChange}
+              type="password"
+              className={
+                isValid.password || formData.password === ""
+                  ? styles.inputBox
+                  : styles.inputBox1
+              }
+              placeholder="비밀번호를 입력해주세요"
+            ></input>
+            {errorMessages.password && <span>{errorMessages.password}</span>}
+            <input
+              name="passwordConfirm"
+              onChange={handleChange}
+              type="password"
+              className={
+                isValid.passwordConfirm || formData.passwordConfirm === ""
+                  ? styles.inputBox
+                  : styles.inputBox1
+              }
+              placeholder="비밀번호를 다시 한번 입력해주세요"
+            ></input>
+            {errorMessages.passwordConfirm && (
+              <span className={`message error`}>
+                {errorMessages.passwordConfirm}
+              </span>
+            )}
+          </div>
+          <div>
+            <h5>나이</h5>
+            <select
+              className={styles.ageScroll}
+              value={formData.birth || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, birth: Number(e.target.value) })
+              }
+            >
+              <option value="">출생년도 입력(선택)</option>
+              {[...Array(87)].map((_, index) => (
+                <option key={index} value={2004 - index}>
+                  {2004 - index}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className={styles.agreeForm1}>
             <div className={styles.allWrapper}>
               <input
