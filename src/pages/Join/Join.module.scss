@@ -274,7 +274,7 @@
   }
   .emailInputBox,
   .emailInputBox1 {
-    width: 60vw;
+    width: 57vw;
     height: 50px;
     min-height: 50px;
     padding: 0px 3vw;
@@ -295,8 +295,10 @@
     font-size: 12px;
     border-radius: 5px;
     color: #333;
-    padding: 0px 3vw;
+    background-color: #eaeaea;
+    // padding: 0px 3vw;
     height: 50px;
+    width: 20vw;
   }
   .boxWrapper {
     margin: 0;

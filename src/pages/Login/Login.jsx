@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 import { accessTokenAtom } from "../../store/jotaiAtoms";
 import axios from "axios";
 
-export default function Login() {
+export default function Main() {
   return (
     <>
       <LoginForm />
