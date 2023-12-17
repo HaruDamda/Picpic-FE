@@ -8,7 +8,7 @@ import { accessTokenAtom } from "../../store/jotaiAtoms";
 
 const FrameList = () => {
   const [frames, setFrames] = useState([]);
-  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const [accessToken] = useAtom(accessTokenAtom);
 
   useEffect(() => {
     // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
@@ -44,7 +44,7 @@ const FrameList = () => {
         <button className={styles.newFrame}>새 프레임 만들기</button>
       </Link>
       <div className={styles.FrameScroll}>
-        {frames.length === null ? ( // frames 배열이 비어 있는 경우
+        {frames.length === 0 ? ( // frames 배열이 비어 있는 경우
           <div className={styles.InfoMsg}>
             <h3>새 프레임을 추가해주세요</h3>
           </div>
@@ -53,14 +53,14 @@ const FrameList = () => {
           <ul className={styles.FrameUl}>
             {frames.map((frame, index) => (
               <li key={frame.id} className={styles.FrameItem}>
-                <button>
+                <Link to={"/applyframe"} state={{ selectedFrame: frame }}>
                   <img
                     key={index}
                     src={frame}
                     alt="frame"
                     className={styles.FrameImage}
                   />
-                </button>
+                </Link>
               </li>
             ))}
           </ul>

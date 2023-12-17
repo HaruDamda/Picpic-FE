@@ -1,77 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Brush.module.css";
 import color from "../../img/color.png";
 
-const Brush = () => {
-  // 초기 색상은 검정색으로 설정
-  const [selectedColor, setSelectedColor] = useState("#000000");
+const Brush = ({ ctx, setCtx }) => {
+  const [lineColor, setLineColor] = useState("#000000");
+  const [lineWidth, setLineWidth] = useState(5);
+  const [lineOpacity, setLineOpacity] = useState(0.1);
 
-  const handleColorClick = (color) => {
-    setSelectedColor(color);
-  };
+  useEffect(() => {
+    // 캔버스 context의 설정을 변경합니다.
+    if (ctx) {
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = lineWidth;
+      ctx.globalAlpha = lineOpacity;
+    }
+  }, [ctx, lineColor, lineWidth, lineOpacity]);
 
   return (
     <div className={styles.Bottom}>
       <div className={styles.ColorContainer}>
-        <button>
-          <img src={color} alt="color" />
-        </button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#FFFFFF" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#FFFFFF" }}
-          onClick={() => handleColorClick("#FFFFFF")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#000000" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#000000" }}
-          onClick={() => handleColorClick("#000000")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#009EFF" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#009EFF" }}
-          onClick={() => handleColorClick("#009EFF")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#53DF50" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#53DF50" }}
-          onClick={() => handleColorClick("#53DF50")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#FFCB33" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#FFCB33" }}
-          onClick={() => handleColorClick("#FFCB33")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#FF9634" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#FF9634" }}
-          onClick={() => handleColorClick("#FF9634")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#FF6060" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#FF6060" }}
-          onClick={() => handleColorClick("#FF6060")}
-        ></button>
-        <button
-          className={`${styles.ColorButton} ${
-            selectedColor === "#FF93E1" ? styles.ActiveColorButton : ""
-          }`}
-          style={{ background: "#FF93E1" }}
-          onClick={() => handleColorClick("#FF93E1")}
-        ></button>
+        <label>Brush Color </label>
+        <input
+          type="color"
+          value={lineColor}
+          onChange={(e) => {
+            setLineColor(e.target.value);
+          }}
+        />
+      </div>
+      <div className={styles.BrushContainer}>
+        <div className={styles.WidthContainer}>
+          <label>Brush Width </label>
+          <input
+            className={styles.brushwidth}
+            type="range"
+            min="3"
+            max="10"
+            value={lineWidth}
+            onChange={(e) => {
+              setLineWidth(e.target.value);
+            }}
+          />
+        </div>
+        <div className={styles.OpacityContainer}>
+          <label>Brush Opacity</label>
+          <input
+            className={styles.brushopacity}
+            type="range"
+            min="1"
+            max="100"
+            value={lineOpacity}
+            onChange={(e) => {
+              setLineOpacity(e.target.value);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

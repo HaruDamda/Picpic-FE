@@ -3,7 +3,7 @@ body {
   padding: 0px;
 }
 
-.MakeFrame {
+.ApplyFrame {
   width: 390px;
   height: calc(var(--vh, 1vh) * 100);
   background: #ffffff;
@@ -11,19 +11,21 @@ body {
   flex-direction: column;
   justify-content: center;
   margin: 0;
+  text-decoration: none;
 }
 
-.MakeFramebox {
+.ApplyFramebox {
   display: flex;
   flex-direction: column;
 }
 
 .Top {
-  height: 86px;
+  height: 85px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  border-bottom: 2px solid #c9c9c9;
 }
 
 .Top button {
@@ -53,13 +55,19 @@ body {
 
 .Middle {
   width: 390px;
-  height: 480px;
+  height: 479px;
   display: inline-block;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #f7f8f8;
   position: relative;
+}
+
+.MiddleTop {
+  width: 390px;
+  height: 49px;
+  background-color: #ffffff;
 }
 
 .Frame {
@@ -83,74 +91,51 @@ body {
   position: absolute;
 }
 
-.UploadedImage {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.BaseFrame {
+.SelectedFrame {
   position: absolute;
   z-index: 2;
 }
 
-.UploadedSticker {
-  width: 5px;
-  height: 5px;
+.UploadedImage {
   position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 1;
 }
 
-.BrushClass {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 4;
-}
-
-/* .Frame span {
-  width: 125px;
-  height: 78px;
-  background-color: #f5f5f5;
-}
-
-.Frame span:nth-child(1) {
-  margin-top: 10px;
-} */
-
-.Return {
+.ButtonList {
   width: 390px;
-  height: 50px;
+  height: 210px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+}
+
+.addphoto {
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #009eff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
   background-color: #ffffff;
-  gap: 15px;
-}
-
-.Return button {
-  background-color: #ffffff;
-  border: none;
-}
-
-.Bottom {
-  width: 100%;
-  height: 270px;
-}
-
-.ListTop {
-  height: 40px;
-  padding: 14px 14px 14px 18px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  font-size: 10px;
-  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+}
+
+.savephoto {
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #009eff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #ffffff;
 }
 
 .ListBottom {
@@ -159,7 +144,7 @@ body {
   background: #f7f8f8;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   gap: 20px;
 }
@@ -181,14 +166,6 @@ body {
   height: 24px;
 }
 
-.Brush {
-  width: 650px;
-  height: 50px;
-  display: flex;
-  justify-content: space-evenly;
-  border-radius: 5px;
-  align-items: center;
-  background-color: #a3a3a32d;
-  margin: auto;
-  margin-top: 10px;
+.now {
+  text-decoration: none;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDrag } from "react-use-gesture";
 import { useSpring, animated } from "react-spring";
+import home from "../../img/home.png";
 import map from "../../img/map.png";
 import frame from "../../img/frame-line.png";
 import book from "../../img/book.png";
@@ -43,10 +44,18 @@ const Frame = () => {
       break;
   }
 
+  const topSpan =
+    selectedButton === "프레임 제작" ? "전체 프레임" : "전체 포토";
+
   return (
     <div className={styles.Frame}>
       <div className={styles.Top}>
-        <span>전체 프레임</span>
+        <Link to="/">
+          <button className={styles.ImgBtn}>
+            <img src={home} alt="logo" />
+          </button>
+        </Link>
+        <span>{topSpan}</span>
         <button className={styles.mylistBtn}>
           <img src={framelist} alt="framelist"></img>
         </button>

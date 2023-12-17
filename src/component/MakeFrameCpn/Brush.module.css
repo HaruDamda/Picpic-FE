@@ -1,11 +1,14 @@
 .Bottom {
   width: 390px;
   height: 204px;
+  display: flex;
+  flex-direction: column;
 }
 
 .Bottom button {
   width: 25px;
   height: 25px;
+
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -19,4 +22,47 @@
   align-items: center;
   padding-top: 20px;
   gap: 10px;
+}
+
+.ColorContainer input {
+  background-color: white;
+}
+
+.BrushContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  gap: 10px;
+}
+
+.BrushContainer input {
+  width: 100px;
+}
+
+.brushwidth {
+  background: linear-gradient(
+    to right,
+    #ffe283 0%,
+    #ffe283 50%,
+    #ececec 50%,
+    #ececec 100%
+  );
+  border-radius: 8px;
+  outline: none;
+  accent-color: #ffca1d;
+}
+
+.brushopacity {
+  background: linear-gradient(
+    to right,
+    #ffe283 0%,
+    #ffe283 50%,
+    #ececec 50%,
+    #ececec 100%
+  );
+  border-radius: 8px;
+  outline: none;
+  accent-color: #ffca1d;
 }

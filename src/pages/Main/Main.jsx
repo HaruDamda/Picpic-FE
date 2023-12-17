@@ -29,7 +29,7 @@ export default function Main() {
       <button className={styles.logoutBtn} onClick={() => logout()}>
         로그아웃
       </button>
-      <button className={styles.frameBtn} onClick={() => router("/framelist")}>
+      <button className={styles.frameBtn} onClick={() => router("/frame")}>
         프레임 만들기
       </button>
     </div>

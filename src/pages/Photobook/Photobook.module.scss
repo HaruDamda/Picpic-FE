@@ -1,7 +1,13 @@
 .wrapper {
-  width: 100vw;
+  width: 390px;
   height: 100vh;
-  overflow-x: hidden;
+  overflow-x: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 12px; /* 스크롤 바의 너비 */
+  height: 12px; /* 스크롤 바의 높이 */
+  display: none;
 }
 
 .section1 {
@@ -79,9 +85,9 @@
 }
 
 .navBottom {
-  width: 100vw;
+  width: 390px;
   img {
-    width: 100vw;
+    width: 390px;
   }
 }
 

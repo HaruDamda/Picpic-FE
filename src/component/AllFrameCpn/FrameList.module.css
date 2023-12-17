@@ -61,9 +61,10 @@ ul {
 .FrameItem button {
   background-color: #f7f7f7;
   border: none;
+  height: auto;
 }
 
 .FrameImage {
   width: 60%;
-  height: 60%;
+  height: auto;
 }
