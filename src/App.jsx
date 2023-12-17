@@ -1,12 +1,13 @@
 import "./App.css";
 import { useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useParams } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Join from "./pages/Join/Join";
 import Main from "./pages/Main/Main";
 import Frame from "./pages/Frame/Frame";
 import MakeFrame from "./pages/Frame/MakeFrame";
 import Photobook from "./pages/Photobook/Photobook";
+import PhotobookUuid from "./pages/Photobook/PhotobookUuid";
 import {
   BrowserView,
   MobileView,
@@ -41,8 +42,8 @@ function App() {
               <Route path="/frame" element={<Frame />} />
               <Route path="/makeframe" element={<MakeFrame />} />
               <Route path="/photobook" element={<Photobook />} />
-              <Route path="/framelist" element={<FrameList />} />
               <Route path="/photoselect" element={<PhotoSelect />} />
+              <Route path="/photobook/:uuid" element={<PhotobookUuid />} />
             </Routes>
           </BrowserRouter>
         </BrowserView>
