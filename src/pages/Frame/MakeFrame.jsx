@@ -37,7 +37,6 @@ const MakeFrame = () => {
   const [stickerPositions, setStickerPositions] = useState([]);
   const [frameImage, setFrameImage] = useState(framebase);
   const [actions, setActions] = useState([]);
-  const [uploadedSticker, setUploadedSticker] = useState(null);
   const [stickerSize, setStickerSize] = useState(50);
   const [selectedSticker, setSelectedSticker] = useState(null);
   const [selectedStickers, setSelectedStickers] = useState([]);
