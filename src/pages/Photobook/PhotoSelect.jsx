@@ -14,7 +14,9 @@ export default function PhotoSelect() {
     setSelectedPhotos((prevSelectedPhotos) => {
       // 이미 선택된 사진이면 제거, 아니면 추가
       if (prevSelectedPhotos.includes(index)) {
-        const newSelectedPhotos = prevSelectedPhotos.filter((selectedIndex) => selectedIndex !== index);
+        const newSelectedPhotos = prevSelectedPhotos.filter(
+          (selectedIndex) => selectedIndex !== index
+        );
         console.log("삭제 후:", newSelectedPhotos);
         return newSelectedPhotos;
       } else {
@@ -27,24 +29,27 @@ export default function PhotoSelect() {
 
   useEffect(() => {
     console.log("세팅 후:", selectedPhotos);
-    console.log("api 보내기전: ", selectedPhotos.map(index => getPhotos[index]))
+    console.log(
+      "api 보내기전: ",
+      selectedPhotos.map((index) => getPhotos[index])
+    );
     axios
-      .get('/photo')
+      .get("/photo")
       .then((response) => {
         setGetPhotos(response.data);
         // console.log(getPhotos);
       })
       .catch((error) => console.error(error));
   }, [selectedPhotos]);
-  
+
   const handlePostData = async () => {
     const data = {
-      "name" : "토리",
-      "addPhotoList" : selectedPhotos.map(index => getPhotos[index])
+      name: "토리",
+      addPhotoList: selectedPhotos.map((index) => getPhotos[index]),
     };
-  
+
     try {
-      const response = await axios.post('/photoBook', data);
+      const response = await axios.post("/photoBook", data);
       console.log("API 응답:", response.data);
       router("/photobook");
     } catch (error) {
@@ -53,15 +58,11 @@ export default function PhotoSelect() {
   };
 
   return (
-		<div className={styles.wrapper}>
-			<div className={styles.header}>
-        <button 
-          onClick={handlePostData}
-        >
-          나만의 포토북 제작하기
-        </button>
-			</div>
-			<div className={styles.bodySection}>
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <button onClick={handlePostData}>나만의 포토북 제작하기</button>
+      </div>
+      <div className={styles.bodySection}>
         <div className={styles.boxWrapper}>
           {/* 이미지 배열을 map 함수를 사용하여 렌더링 */}
           {getPhotos.map((photo, index) => (
@@ -86,7 +87,7 @@ export default function PhotoSelect() {
             </div>
           ))}
         </div>
-			</div>
-		</div>
+      </div>
+    </div>
   );
 }

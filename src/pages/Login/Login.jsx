@@ -62,11 +62,14 @@ function LoginForm() {
     };
 
     try {
-      const response = await axios.post("http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/login", data);
+      const response = await axios.post(
+        "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/login",
+        data
+      );
       const accessToken = response.data;
       setAct(accessToken);
       localStorage.setItem("accessToken", accessToken);
-      router('/frame');
+      router("/frame");
     } catch (error) {
       console.error(error);
     }

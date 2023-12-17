@@ -45,14 +45,14 @@ const Sticker = ({ handleStickerSelect }) => {
   };
 
   const handleStickerClick = (stickerInfo) => {
+    setSelectedSticker(stickerInfo);
     // 선택한 스티커 정보를 MakeFrame 컴포넌트로 전달
     handleStickerSelect(stickerInfo);
-    setSelectedSticker(stickerInfo);
   };
 
-  const handleSizeChange = (event) => {
+  function handleSizeChange(event) {
     setStickerSize(event.target.value); // 스티커 크기 업데이트
-  };
+  }
 
   return (
     <div className={styles.Bottom}>
