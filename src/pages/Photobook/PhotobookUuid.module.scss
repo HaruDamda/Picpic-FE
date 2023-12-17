@@ -5,7 +5,7 @@
 }
 
 .wrapper {
-  width: 390px;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,8 @@
     height: 430px;
     margin-top: -12px;
     will-change: transform;
-    box-shadow: 0 62.5px 125px -25px rgba(50, 50, 73, 0.5),
+    box-shadow:
+      0 62.5px 125px -25px rgba(50, 50, 73, 0.5),
       0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
   }
   .memopic {
@@ -85,10 +86,6 @@
   justify-content: flex-start;
   background-color: white;
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.06);
-  button {
-    background-color: #ffffff;
-    border: none;
-  }
   p {
     font-family: Pretendard;
     margin-left: 18px;
@@ -104,7 +101,7 @@
   width: 100%;
   height: 58vh;
   overflow-x: auto;
-  background-color: #dcf2ff;
+  background-color: #DCF2FF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,7 +126,7 @@
       width: 72px;
       height: 72px;
       border-radius: 15px;
-      background: #f7f7f7;
+      background: #F7F7F7;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -141,7 +138,7 @@
       }
     }
     p {
-      color: #009eff;
+      color: #009EFF;
       text-align: center;
       font-family: Pretendard;
       font-size: 10px;
@@ -152,9 +149,9 @@
 }
 
 .navBottom {
-  width: 390px;
+  width: 100vw;
   img {
-    width: 390px;
+    width: 100vw;
   }
 }
 
@@ -170,7 +167,7 @@
   height: 234px;
   top: 33vh;
   left: 6vw;
-  background-color: url("../../img/memo-modal.png");
+  background-color: url('../../img/memo-modal.png');
   background-size: cover; /* 이미지를 화면에 꽉 채우도록 조정 */
   background-position: center; /* 이미지를 가운데 정렬 */
   background-repeat: no-repeat; /* 이미지 반복 방지 */
@@ -198,9 +195,8 @@
       margin-top: 0px;
       color: #000;
       text-align: center;
-      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont,
-        Pretendard, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-        "Helvetica Neue", sans-serif;
+      font-family: "SUIT Variable", -apple-system, BlinkMacSystemFont, Pretendard, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       font-size: 16px;
       font-weight: 400;
       line-height: normal;
@@ -211,7 +207,7 @@
       background-color: #f8f8f8;
       resize: none;
       &:focus {
-        border: 1px solid #009eff;
+        border: 1px solid #009EFF;
       }
     }
     .saveBtn {
@@ -223,7 +219,7 @@
       align-items: center;
       justify-content: center;
       color: white;
-      background-color: #009eff;
+      background-color: #009EFF;
       border: none;
       border-radius: 19px;
       cursor: pointer;
@@ -241,7 +237,7 @@
   width: 100vw;
   height: 1100vh;
   position: absolute;
-  background-color: rgba(0, 40, 64, 0.6);
+  background-color: rgba(0, 40, 64, 0.60);
   // opacity: 40%;
   top: 0px;
   left: 0px;
@@ -253,7 +249,7 @@
 .emojiBox {
   position: absolute;
   z-index: 10;
-  bottom: 31vh;
+  bottom: 5px;
   width: 80vw;
   height: 72px;
   padding: 0 22px;

@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 import { accessTokenAtom } from "../../store/jotaiAtoms";
 import axios from "axios";
 
-export default function Main() {
+export default function Login() {
   return (
     <>
       <LoginForm />
@@ -61,20 +61,18 @@ function LoginForm() {
       password,
     };
 
-    axios
-      .post(
+    try {
+      const response = await axios.post(
         "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/login",
         data
-      )
-      .then((res) => {
-        const accessToken = res.data;
-        setAct(accessToken); // 액세스 토큰을 Jotai 상태에 업데이트
-        localStorage.setItem("accessToken", `${accessToken}`);
-        router("/frame");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+      const accessToken = response.data;
+      setAct(accessToken);
+      localStorage.setItem("accessToken", accessToken);
+      router("/frame");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

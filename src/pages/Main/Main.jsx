@@ -19,18 +19,15 @@ export default function Main() {
   return (
     <div className={styles.root}>
       <Link to="/login" className={styles.linkBtn_container}>
-        <button className={styles.linkBtn}>
+        <button className={styles.logoBtn}>
           <img src={main_logo} alt="main-logo" />
         </button>
       </Link>
-      <button className={styles.loginBtn} onClick={() => router("/login")}>
-        로그인
-      </button>
-      <button className={styles.logoutBtn} onClick={() => logout()}>
+      <Link to="/login" className={styles.linkBtn_container}>
+        <button className={styles.loginBtn}>로그인</button>
+      </Link>
+      <button className={styles.logoutBtn} onClick={logout}>
         로그아웃
-      </button>
-      <button className={styles.frameBtn} onClick={() => router("/frame")}>
-        프레임 만들기
       </button>
     </div>
   );

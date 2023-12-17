@@ -2,13 +2,13 @@ import { useEffect, useState, useRef } from "react";
 import { useSprings, useSpring, animated } from "@react-spring/web";
 import useMeasure from "react-use-measure";
 import { useDrag } from "react-use-gesture";
+import { useParams } from "react-router-dom";
 import clamp from "lodash/clamp";
 import styles from "./Photobook.module.scss";
-// import memoIcon from "../../img/icon-memo.png";
-import shareIcon from "../../img/icon-share.png";
+import memoIcon from "../../img/icon-memo.png";
+// import shareIcon from "../../img/icon-share.png";
 import navBottom from "../../img/nav-bottom.png";
 import memoModal from "../../img/memo-modal.png";
-import home from "../../img/home.png";
 import emoji1 from "../../img/emoji1.png";
 import emoji2 from "../../img/emoji2.png";
 import emoji3 from "../../img/emoji3.png";
@@ -92,8 +92,9 @@ export default function Photobook() {
   const axios = useAxios();
   const [modal, setModal] = useState(0);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
-  const [uuid, setUuid] = useState(null);
+  const [uuidData, setUuidData] = useState(null);
   const [isEmojiBoxVisible, setIsEmojiBoxVisible] = useState(false);
+  const { uuid } = useParams();
 
   const emojiArray = [emoji1, emoji2, emoji3, emoji4, emoji5];
   const emojiArray2 = [emoji01, emoji02, emoji03, emoji04, emoji05];
@@ -101,14 +102,14 @@ export default function Photobook() {
 
   useEffect(() => {
     axios
-      .get("/photoBook") // 인스턴스로 axios 요청 보내기
+      .get(`/photoBook/${uuid}`) // 인스턴스로 axios 요청 보내기
       .then((response) => {
         console.log(response.data);
         setPhotos(response.data.photoList);
-        setUuid(response.data.uuid);
+        setUuidData(response.data.uuid);
       })
       .catch((error) => console.error(error));
-  });
+  }, [uuid]);
 
   const selectEmoji = (index) => {
     setSelectedEmoji(index);
@@ -122,9 +123,9 @@ export default function Photobook() {
     // }
   };
 
-  // const toggleEmojiBox = () => {
-  //   setIsEmojiBoxVisible(!isEmojiBoxVisible);
-  // };
+  const toggleEmojiBox = () => {
+    setIsEmojiBoxVisible(!isEmojiBoxVisible);
+  };
 
   // 이모지 박스 애니메이션 스타일 설정
   const emojiBoxSpring = useSpring({
@@ -133,31 +134,31 @@ export default function Photobook() {
     config: { tension: 200, friction: 20, mass: 1, duration: 100 },
   });
 
-  const shareLink = () => {
-    // 현재 경로에 uuid를 붙여서 공유할 링크 생성
-    const shareableLink = `${window.location.href}/${uuid}`;
+  // const shareLink = () => {
+  //   // 현재 경로에 uuid를 붙여서 공유할 링크 생성
+  //   const shareableLink = `${window.location.href}/${uuidData}`;
 
-    // 클립보드에 복사
-    navigator.clipboard
-      .writeText(shareableLink)
-      .then(() => {
-        console.log("링크가 클립보드에 복사되었습니다.");
-      })
-      .catch((err) => {
-        console.error("링크 복사 중 오류 발생:", err);
-      });
-    console.log("링크:", `${window.location.href}/${uuid}`);
-    // // 현재 주소에 uuid 파라미터 추가
-    // const currentUrl = new URL(window.location.href);
-    // currentUrl.searchParams.set('uuid', 'YOUR_UUID'); // 여기에 받아온 uuid 변수를 넣어주세요
-    // navigator.clipboard.writeText(currentUrl.href)
-    //   .then(() => {
-    //     alert('링크가 복사되었습니다.');
-    //   })
-    //   .catch((error) => {
-    //     console.error('링크 복사 중 오류 발생:', error);
-    //   });
-  };
+  //   // 클립보드에 복사
+  //   navigator.clipboard
+  //     .writeText(shareableLink)
+  //     .then(() => {
+  //       console.log("링크가 클립보드에 복사되었습니다.");
+  //     })
+  //     .catch((err) => {
+  //       console.error("링크 복사 중 오류 발생:", err);
+  //     });
+  // 	console.log("링크:", `${window.location.href}/${uuidData}`);
+  //   // // 현재 주소에 uuid 파라미터 추가
+  //   // const currentUrl = new URL(window.location.href);
+  //   // currentUrl.searchParams.set('uuid', 'YOUR_UUID'); // 여기에 받아온 uuid 변수를 넣어주세요
+  //   // navigator.clipboard.writeText(currentUrl.href)
+  //   //   .then(() => {
+  //   //     alert('링크가 복사되었습니다.');
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.error('링크 복사 중 오류 발생:', error);
+  //   //   });
+  // };
 
   const saveMemo = () => {};
 
@@ -210,17 +211,11 @@ export default function Photobook() {
       </div>
       <div className={styles.section3}>
         <div className={styles.buttonBox}>
-          <button onClick={shareLink}>
-            <img className={styles.shareIcon} src={shareIcon} alt={shareIcon} />
-          </button>
-          <p>링크 공유하기</p>
-        </div>
-        {/* <div className={styles.buttonBox}>
           <button onClick={toggleEmojiBox}>
             <img className={styles.memoIcon} src={memoIcon} alt={memoIcon} />
           </button>
           <p>쪽지 입력하기</p>
-        </div> */}
+        </div>
       </div>
       <div className={styles.navBottom}>
         <img src={navBottom} alt={navBottom} />
