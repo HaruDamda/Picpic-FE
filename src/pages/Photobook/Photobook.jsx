@@ -8,6 +8,7 @@ import styles from "./Photobook.module.scss";
 import shareIcon from "../../img/icon-share.png";
 import navBottom from "../../img/nav-bottom.png";
 import memoModal from "../../img/memo-modal.png";
+import home from "../../img/home.png";
 import emoji1 from "../../img/emoji1.png";
 import emoji2 from "../../img/emoji2.png";
 import emoji3 from "../../img/emoji3.png";
@@ -26,10 +27,12 @@ import memopic5 from "../../img/memopic5.png";
 import useAxios from "../../apis/axiosWithToken";
 
 export default function Photobook() {
-  {/* 포토북 UI 시작 */}
+  {
+    /* 포토북 UI 시작 */
+  }
   const index = useRef(0);
   const [ref, { width }] = useMeasure();
-	const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState([]);
   const [activeDot, setActiveDot] = useState(0);
   const [props, api] = useSprings(
     photos.length,
@@ -43,7 +46,7 @@ export default function Photobook() {
   const bind = useDrag(
     ({ active, movement: [mx], direction: [xDir], distance, cancel }) => {
       if (active && distance > width / 2) {
-				setActiveDot(null);
+        setActiveDot(null);
         index.current = clamp(
           index.current + (xDir > 0 ? -1 : 1),
           0,
@@ -58,18 +61,18 @@ export default function Photobook() {
         const scale = active ? 1 - distance / width / 2 : 1;
         return { x, scale, display: "block" };
       });
-      
-			// 스크롤에 따른 활성화를 유지
-			// setActiveDot(clamp(Math.round(index.current), 0, photos.length - 1));
-			// 클릭한 동그라미가 있다면 스크롤로 인한 활성화를 무시하고 클릭한 동그라미를 유지
-			const activeDotIndex = clamp(
-				Math.round(index.current),
-				0,
-				photos.length - 1
-			);
-			setActiveDot(activeDotIndex);
-			// console.log("스크롤 점 인덱스: ", activeDotIndex);
-		}
+
+      // 스크롤에 따른 활성화를 유지
+      // setActiveDot(clamp(Math.round(index.current), 0, photos.length - 1));
+      // 클릭한 동그라미가 있다면 스크롤로 인한 활성화를 무시하고 클릭한 동그라미를 유지
+      const activeDotIndex = clamp(
+        Math.round(index.current),
+        0,
+        photos.length - 1
+      );
+      setActiveDot(activeDotIndex);
+      // console.log("스크롤 점 인덱스: ", activeDotIndex);
+    }
   );
   // 동그라미를 클릭했을 때 해당 사진으로 이동하는 함수
   const handleDotClick = (dotIndex) => {
@@ -80,9 +83,11 @@ export default function Photobook() {
       const x = (i - index.current) * width;
       return { x, scale: 1, display: "block" };
     });
-		setActiveDot(null); // 클릭한 동그라미를 활성화 상태로 설정
+    setActiveDot(null); // 클릭한 동그라미를 활성화 상태로 설정
   };
-  {/* 포토북 UI 마침 */}
+  {
+    /* 포토북 UI 마침 */
+  }
 
   const axios = useAxios();
   const [modal, setModal] = useState(0);
@@ -99,7 +104,7 @@ export default function Photobook() {
       .get("/photoBook") // 인스턴스로 axios 요청 보내기
       .then((response) => {
         console.log(response.data);
-				setPhotos(response.data.photoList);
+        setPhotos(response.data.photoList);
         setUuid(response.data.uuid);
       })
       .catch((error) => console.error(error));
@@ -141,7 +146,7 @@ export default function Photobook() {
       .catch((err) => {
         console.error("링크 복사 중 오류 발생:", err);
       });
-		console.log("링크:", `${window.location.href}/${uuid}`);
+    console.log("링크:", `${window.location.href}/${uuid}`);
     // // 현재 주소에 uuid 파라미터 추가
     // const currentUrl = new URL(window.location.href);
     // currentUrl.searchParams.set('uuid', 'YOUR_UUID'); // 여기에 받아온 uuid 변수를 넣어주세요

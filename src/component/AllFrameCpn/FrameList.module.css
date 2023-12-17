@@ -55,15 +55,16 @@ ul {
 .FrameItem {
   width: calc(40% - 10px);
   gap: 10px;
-  margin: 20px 10px;
+  margin: 20px 10px 0px 10px;
 }
 
 .FrameItem button {
-  background: #ffffff;
+  background-color: #f7f7f7;
   border: none;
+  height: auto;
 }
 
 .FrameImage {
-  width: 100%;
+  width: 60%;
   height: auto;
 }
