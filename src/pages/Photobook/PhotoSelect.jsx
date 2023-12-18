@@ -36,8 +36,8 @@ export default function PhotoSelect() {
     axios
       .get("/photo")
       .then((response) => {
-        setGetPhotos(response.data);
-        // console.log(getPhotos);
+        setGetPhotos(response.data.photoList);
+        console.log(response.data);
       })
       .catch((error) => console.error(error));
   }, [selectedPhotos]);
