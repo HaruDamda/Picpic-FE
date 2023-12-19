@@ -492,14 +492,14 @@ const MakeFrame = () => {
               />
             ))}
           </div>
+          <div className={styles.Return}>
+            <button onClick={undoAction}>실행 취소</button>
+          </div>
         </div>
         <div
           className={styles.Bottom}
           // style={{ transform: `translateY(${bottomContentHeight - 130}px)` }}
         >
-          <div className={styles.Return}>
-            <button onClick={undoAction}>실행 취소</button>
-          </div>
           <div className={styles.BottomContent}>{bottomContent}</div>
           <div className={styles.ListBottom}>
             <button

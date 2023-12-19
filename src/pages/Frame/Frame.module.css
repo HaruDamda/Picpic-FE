@@ -1,5 +1,4 @@
 .Frame {
-  width: 390px;
   height: calc(var(--vh, 1vh) * 100);
   background: #ffffff;
   display: flex;
