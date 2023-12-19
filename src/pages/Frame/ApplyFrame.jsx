@@ -166,22 +166,20 @@ const ApplyFrame = () => {
             },
           };
 
-            axios
-              .post(
-                "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/photo",
-                formData,
-                config
-              )
-              .then((res) => {
-                console.log("프레임 적용한 사진 저장 API 응답:", res.data);
-                alert("저장 완료되었습니다.");
-                router("/photoselect");
-              })
-              .catch((err) => {
-                console.error("API 요청 중 오류 발생:", err);
-              });
-          }, "image/png");
-        };
+          axios
+            .post(
+              "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/photo",
+              formData,
+              config
+            )
+            .then((res) => {
+              console.log("프레임 적용한 사진 저장 API 응답:", res.data);
+              alert("저장 완료되었습니다.")
+            })
+            .catch((err) => {
+              console.error("API 요청 중 오류 발생:", err);
+            });
+        }, "image/png");
       });
     }
   };
