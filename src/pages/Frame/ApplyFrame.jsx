@@ -5,7 +5,7 @@ import left from "../../img/left.png";
 import trash from "../../img/trash.png";
 import photobook from "../../img/book.png";
 import frameline from "../../img/frame-line.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { accessTokenAtom } from "../../store/jotaiAtoms";
 import html2canvas from "html2canvas";
@@ -18,6 +18,7 @@ const ApplyFrame = () => {
   const [selectedButton, setSelectedButton] = useState("프레임 제작");
   const [accessToken] = useAtom(accessTokenAtom);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const router = useNavigate();
 
   console.log(selectedFrame);
 
@@ -64,6 +65,7 @@ const ApplyFrame = () => {
 
     if (accessToken) {
       const config = {
+        data: frameUrl,
         headers: {
           Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
         },
@@ -71,13 +73,12 @@ const ApplyFrame = () => {
       axios
         .delete(
           "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
-          config,
-          { data: frameUrl }
+          config
         )
         .then((res) => {
           console.log(res.data);
           // 성공적으로 데이터를 받아온 경우
-          setFrames(res.data); // 받아온 데이터로 frames 상태 업데이트
+          // setFrames(res.data); // 받아온 데이터로 frames 상태 업데이트
         })
         .catch((err) => {
           // 오류 처리
@@ -135,6 +136,8 @@ const ApplyFrame = () => {
               )
               .then((res) => {
                 console.log("프레임 적용한 사진 저장 API 응답:", res.data);
+                alert("저장 완료되었습니다.");
+                router("/photoselect");
               })
               .catch((err) => {
                 console.error("API 요청 중 오류 발생:", err);

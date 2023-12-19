@@ -10,7 +10,7 @@ import framelist from "../../img/framelist.png";
 import styles from "./Frame.module.css";
 import Template from "../../component/MakeFrameCpn/Template";
 import FrameList from "../../component/AllFrameCpn/FrameList";
-import Photobook from "../Photobook/PhotoSelect";
+import PhotoList from "../Photobook/PhotoList";
 import { Link } from "react-router-dom";
 
 const Frame = () => {
@@ -37,7 +37,7 @@ const Frame = () => {
       middleContent = <FrameList />;
       break;
     case "포토북":
-      middleContent = <Photobook />;
+      middleContent = <PhotoList />;
       break;
     default:
       middleContent = <FrameList />;

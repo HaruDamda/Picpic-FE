@@ -342,9 +342,6 @@ export default function Photobook() {
           <p>쪽지 입력하기</p>
         </div>
       </div>
-      <div className={styles.navBottom}>
-        <img src={navBottom} alt={navBottom} />
-      </div>
       {/* 모달 */}
       <div className={styles[`modal${modal}`]}>
         <img className={styles.memoModal} src={memoModal} alt={memoModal} />
