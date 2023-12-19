@@ -15,6 +15,7 @@ import PhotoSelect from "./pages/Photobook/PhotoSelect";
 // import { useAtom } from "jotai";
 // import axios from "axios";
 // import { accessTokenAtom, setAccessToken } from "./store/jotaiAtoms";
+import Example from "./pages/Example/Example";
 
 function App() {
   function setScreenSize() {
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/photobook" element={<Photobook />} />
                 <Route path="/photoselect" element={<PhotoSelect />} />
                 <Route path="/photobook/:uuid" element={<PhotobookUuid />} />
+                <Route path="/example" element={<Example />} />
               </Routes>
             </BrowserRouter>
           </BrowserView>
@@ -58,6 +60,8 @@ function App() {
                 <Route path="/photobook" element={<Photobook />} />
                 <Route path="/framelist" element={<FrameList />} />
                 <Route path="/photoselect" element={<PhotoSelect />} />
+                <Route path="/photobook/:uuid" element={<PhotobookUuid />} />
+                <Route path="/example" element={<Example />} />
               </Routes>
             </BrowserRouter>
           </MobileView>

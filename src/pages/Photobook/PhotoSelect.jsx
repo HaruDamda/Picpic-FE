@@ -8,6 +8,7 @@ export default function PhotoSelect() {
   const axios = useAxios();
   const [getPhotos, setGetPhotos] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState([]);
+  const [isPhotobookExist, setIsPhotobookExist] = useState(false);
   const router = useNavigate();
 
   const handlePhotoClick = (index) => {
@@ -36,8 +37,8 @@ export default function PhotoSelect() {
     axios
       .get("/photo")
       .then((response) => {
-        setGetPhotos(response.data);
-        // console.log(getPhotos);
+        setGetPhotos(response.data.photoList);
+        setIsPhotobookExist(response.data.present);
       })
       .catch((error) => console.error(error));
   }, [selectedPhotos]);
@@ -47,20 +48,42 @@ export default function PhotoSelect() {
       name: "토리",
       addPhotoList: selectedPhotos.map((index) => getPhotos[index]),
     };
-
-    try {
-      const response = await axios.post("/photoBook", data);
-      console.log("API 응답:", response.data);
-      router("/photobook");
-    } catch (error) {
-      console.error("API 오류:", error);
+    
+    if (selectedPhotos.length === 0) {
+      // 선택된 사진이 없을 경우 알림 창 띄우기
+      alert("사진을 선택해주세요.");
+      return;
+    } 
+    else {
+      try {
+        const response = await axios.post("/photoBook", data);
+        console.log("API 응답:", response.data);
+        router("/photobook");
+      } catch (error) {
+        console.error("API 오류:", error);
+      }
     }
   };
+
+  const checkPhotobook = () => {
+    router("/photobook");
+  }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <button onClick={handlePostData}>나만의 포토북 제작하기</button>
+        {isPhotobookExist ? (
+          <button onClick={checkPhotobook} className={styles.active}>
+            내 포토북 확인하기
+          </button>
+        ) : (
+          <button
+            onClick={handlePostData}
+            className={selectedPhotos.length !== 0 ? styles.active : styles.inactive}
+          >
+            나만의 포토북 제작하기
+          </button>
+        )}
       </div>
       <div className={styles.bodySection}>
         <div className={styles.boxWrapper}>

@@ -13,21 +13,22 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  margin-top: 44px;
-  button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .inactive, .active {
     height: 50px;
     width: 340px;
     border-radius: 10px;
-    border: 1px solid #009eff;
+    border: 2px solid #009eff;
     color: #009eff;
     text-align: center;
     font-size: 14px;
     font-weight: 500;
     background-color: white;
-    &:hover {
-      background-color: #009eff;
-      color: white;
-    }
+  }
+  .active {
+    background-color: #009eff;
+    color: white;
   }
 }
 

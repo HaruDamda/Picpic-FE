@@ -75,9 +75,7 @@ const ApplyFrame = () => {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      data: {
-        url: frameUrl,
-      },
+      data: frameUrl,
     };
 
     // Axios를 사용하여 DELETE 요청 보내기
