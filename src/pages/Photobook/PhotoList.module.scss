@@ -1,0 +1,89 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100vw;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 20px 0;
+  position: absolute;
+  z-index: 10;
+  margin-top: -1px;
+  .inactive, .active {
+    height: 50px;
+    width: 340px;
+    border-radius: 10px;
+    border: 2px solid #009eff;
+    color: #009eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: white;
+  }
+  .active {
+    background-color: #009eff;
+    color: white;
+  }
+}
+
+.bodySection {
+  width: 100vw;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  margin-top: 12vh;
+  .boxWrapper {
+    position: relative;
+    width: 340px;
+    min-height: 673px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2열로 나열 */
+    grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px; /* 각 요소 사이의 간격 설정 */
+  }
+  .photoBox {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    background-color: #f7f7f7;
+    img {
+      position: absolute;
+      z-index: 1;
+      height: 160px;
+      left: 26.22px;
+      width: auto;
+    }
+    .selectBox {
+      position: absolute;
+      z-index: 5;
+      width: 160px;
+      height: 160px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border: 2.5px solid #009eff;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row-reverse;
+      .selectNumber {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: #009eff;
+        border-radius: 40px;
+        margin: 8px;
+      }
+    }
+  }
+}

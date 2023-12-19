@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  width: 100%;
 }
 .logoBtn {
   width: 100%;
@@ -12,14 +13,17 @@
   margin-bottom: 100px;
 
   img {
-    width: 56%;
-    height: 50%;
+    width: 50%;
+    height: auto;
     display: inline-flex;
   }
 }
+.linkBtn_container{
+  width: 100%;
+}
 .logoutBtn,
 .loginBtn {
-  width: 50vw;
+  width: 50%;
   height: 45px;
   background-color: #009eff;
   border: none;
