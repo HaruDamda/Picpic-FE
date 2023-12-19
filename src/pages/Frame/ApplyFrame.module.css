@@ -60,7 +60,7 @@ button {
 
 .Middle {
   width: 390px;
-  height: 479px;
+  flex: 1;
   display: inline-block;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +71,7 @@ button {
 
 .MiddleTop {
   width: 390px;
-  height: 49px;
+  height: 50px;
   background-color: #ffffff;
 }
 
@@ -103,6 +103,9 @@ button {
 
 .UploadedImage {
   position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
 }
 

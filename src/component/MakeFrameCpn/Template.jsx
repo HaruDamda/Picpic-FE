@@ -7,12 +7,13 @@ import template5 from "../../assets/template-5.png";
 import template6 from "../../assets/template-6.png";
 import template7 from "../../assets/template-7.png";
 import template8 from "../../assets/template-8.png";
-// import template9 from "../../assets/template-9.png";
+import template9 from "../../assets/template-9.png";
 import template10 from "../../assets/template-10.png";
 import template11 from "../../assets/template-11.png";
 import template12 from "../../assets/template-12.png";
 import template13 from "../../assets/template-13.png";
 import template14 from "../../assets/template-14.png";
+import template15 from "../../assets/template-15.png";
 import styles from "./Template.module.css";
 
 const Template = ({ changeFrameImage }) => {
@@ -50,6 +51,9 @@ const Template = ({ changeFrameImage }) => {
         <button onClick={() => handleFrameButtonClick(template8)}>
           <img src={template8} alt="template8" />
         </button>
+        <button onClick={() => handleFrameButtonClick(template9)}>
+          <img src={template9} alt="template9" />
+        </button>
         <button onClick={() => handleFrameButtonClick(template10)}>
           <img src={template10} alt="template10" />
         </button>
@@ -64,6 +68,9 @@ const Template = ({ changeFrameImage }) => {
         </button>
         <button onClick={() => handleFrameButtonClick(template14)}>
           <img src={template14} alt="template14" />
+        </button>
+        <button onClick={() => handleFrameButtonClick(template15)}>
+          <img src={template15} alt="template15" />
         </button>
       </div>
     </div>

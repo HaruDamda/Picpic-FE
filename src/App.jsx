@@ -59,7 +59,6 @@ function App() {
                 <Route path="/makeframe" element={<MakeFrame />} />
                 <Route path="/applyframe" element={<ApplyFrame />} />
                 <Route path="/photobook" element={<Photobook />} />
-                <Route path="/framelist" element={<FrameList />} />
                 <Route path="/photoselect" element={<PhotoSelect />} />
                 <Route path="/photobook/:uuid" element={<PhotobookUuid />} />
                 <Route path="/example" element={<Example />} />

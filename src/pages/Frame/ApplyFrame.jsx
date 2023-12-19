@@ -105,28 +105,66 @@ const ApplyFrame = () => {
       const frameElement = document.querySelector(`.${styles.Frame}`);
       frameElement.src = selectedFrame;
 
-      html2canvas(frameElement).then((canvas) => {
-        const context = canvas.getContext("2d");
+      const uploadedImageElement = document.querySelector(
+        `.${styles.UploadedImage}`
+      );
 
-        const selectedFrameImg = new Image();
-        selectedFrameImg.crossOrigin = "anonymous";
-        selectedFrameImg.src =
-          selectedFrame + "?timestamp=" + new Date().getTime();
-        console.log(selectedFrameImg);
-        selectedFrameImg.onload = () => {
-          context.drawImage(selectedFrameImg, 0, 0);
+      const uploadedImageWidth = uploadedImageElement.clientWidth;
+      const uploadedImageHeight = uploadedImageElement.clientHeight;
 
-          // Convert canvas content to blob and save
-          canvas.toBlob((blob) => {
-            const formData = new FormData();
-            formData.append("photo", blob, "frame.png");
+      const canvas = document.createElement("canvas");
+      canvas.width = uploadedImageWidth;
+      canvas.height = uploadedImageHeight;
+      const context = canvas.getContext("2d");
 
-            const config = {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${accessToken}`,
-              },
-            };
+      const selectedFrameImg = new Image();
+      selectedFrameImg.crossOrigin = "anonymous";
+      selectedFrameImg.src =
+        selectedFrame + "?timestamp=" + new Date().getTime();
+
+      const uploadedImage = new Image();
+      uploadedImage.crossOrigin = "anonymous";
+      uploadedImage.src = uploadedImageElement.src;
+
+      Promise.all([
+        new Promise((resolve) => {
+          selectedFrameImg.onload = () => {
+            resolve();
+          };
+        }),
+        new Promise((resolve) => {
+          uploadedImage.onload = () => {
+            resolve();
+          };
+        }),
+      ]).then(() => {
+        context.drawImage(
+          uploadedImage,
+          0,
+          0,
+          uploadedImageWidth,
+          uploadedImageHeight
+        );
+
+        context.drawImage(
+          selectedFrameImg,
+          0,
+          0,
+          uploadedImageWidth,
+          uploadedImageHeight
+        );
+
+        // Convert canvas content to blob and save
+        canvas.toBlob((blob) => {
+          const formData = new FormData();
+          formData.append("photo", blob, "frame.png");
+
+          const config = {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          };
 
             axios
               .post(
