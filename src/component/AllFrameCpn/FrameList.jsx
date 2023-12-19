@@ -27,15 +27,15 @@ const FrameList = () => {
         )
         .then((res) => {
           console.log(res.data);
-          // 성공적으로 데이터를 받아온 경우
-          setFrames(res.data); // 받아온 데이터로 frames 상태 업데이트
+
+          setFrames(res.data);
         })
         .catch((err) => {
           // 오류 처리
           console.error("API 요청 중 오류 발생:", err);
         });
     }
-  }, [accessToken]); // useEffect가 실행되는 조건을 accessToken이 변경될 때로 설정
+  }, [accessToken]);
 
   return (
     <div className={styles.FrameList}>

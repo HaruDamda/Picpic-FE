@@ -184,7 +184,8 @@ export default function Photobook() {
                 className={styles.photo}
                 style={{ scale, backgroundImage: `url(${photos[i]})` }}
               />
-              {selectedEmoji !== null && (
+              {/* 선택된 photo일 때만 memopic을 렌더링 */}
+              {selectedEmoji !== null && i === index.current && (
                 <animated.img
                   className={styles.memopic}
                   src={`${memopicArray[selectedEmoji]}`}

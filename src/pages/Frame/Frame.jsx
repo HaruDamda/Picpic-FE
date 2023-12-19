@@ -44,8 +44,7 @@ const Frame = () => {
       break;
   }
 
-  const topSpan =
-    selectedButton === "프레임 제작" ? "전체 프레임" : "전체 포토";
+  const topSpan = selectedButton === "프레임 제작" ? "Home" : "전체 포토";
 
   return (
     <div className={styles.Frame}>
@@ -55,17 +54,21 @@ const Frame = () => {
             <img src={home} alt="logo" />
           </button>
         </Link>
-        <span>{topSpan}</span>
-        <button className={styles.mylistBtn}>
-          <img src={framelist} alt="framelist"></img>
-        </button>
+        <div className={styles.Center}>
+          <span>{topSpan}</span>
+        </div>
+        <div className={styles.Right}>
+          <button className={styles.mylistBtn}>
+            <img src={framelist} alt="framelist"></img>
+          </button>
+        </div>
       </div>
       <div className={styles.Middle}>{middleContent}</div>
       <div className={styles.Bottom}>
         <div className={styles.ListBottom}>
           <button onClick={() => handleButtonClick("프레임 제작")}>
             <img src={frame} alt="frame"></img>
-            프레임 제작
+            전체 프레임
           </button>
           <button onClick={() => handleButtonClick("포토북")}>
             <img src={book} alt="book"></img>

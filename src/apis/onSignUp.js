@@ -8,7 +8,10 @@ export const onSignUp = (userInfo, router) => {
   //   password: sha256(userInfo.password).toString(),
   // };
   axios
-    .post("http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/join", userInfo)
+    .post(
+      "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/user/join",
+      userInfo
+    )
     .then((res) => {
       console.log(res.data);
       router("/login");
