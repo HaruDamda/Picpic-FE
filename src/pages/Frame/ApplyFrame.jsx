@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styles from "../Frame/ApplyFrame.module.css";
-import edit from "../../img/edit.png";
+import left from "../../img/left.png";
 import trash from "../../img/trash.png";
 import photobook from "../../img/book.png";
 import frameline from "../../img/frame-line.png";
@@ -18,6 +18,8 @@ const ApplyFrame = () => {
   const [selectedButton, setSelectedButton] = useState("프레임 제작");
   const [accessToken] = useAtom(accessTokenAtom);
   const [uploadedImage, setUploadedImage] = useState(null);
+
+  console.log(selectedFrame);
 
   useEffect(() => {
     // uploadedImage 값이 변경될 때 로컬 스토리지에 이미지 데이터를 저장합니다.
@@ -36,7 +38,6 @@ const ApplyFrame = () => {
   const handleEditFrame = (frameUrl) => {
     console.log("Edit Frame URL:", frameUrl);
 
-    // 수정할 프레임의 URL과 accessToken을 이용하여 PUT 요청을 생성
     const editFrameRequest = {
       url: `http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame`,
       method: "PUT",
@@ -45,51 +46,44 @@ const ApplyFrame = () => {
         "Content-Type": "application/json",
       },
       data: {
-        url: frameUrl, // 수정할 프레임의 URL
-        // 여기에 수정할 데이터 추가 (예: 수정된 프레임의 새로운 URL 등)
+        url: frameUrl,
       },
     };
 
-    // Axios를 사용하여 PUT 요청 보내기
     axios(editFrameRequest)
       .then((response) => {
-        // 수정 요청이 성공했을 때의 동작
         console.log("프레임 수정 요청 성공:", response.data);
-        // 필요에 따라 상태(state)를 업데이트하거나 다른 작업 수행
       })
       .catch((error) => {
-        // 수정 요청이 실패했을 때의 동작
         console.error("프레임 수정 요청 실패:", error);
-        // 오류 처리 혹은 다른 처리 로직 구현
       });
   };
 
   const handleDeleteFrame = (frameUrl) => {
     console.log("Delete Frame URL:", frameUrl);
 
-    // 삭제할 프레임의 URL과 accessToken을 이용하여 DELETE 요청을 생성
-    const deleteFrameRequest = {
-      url: `http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame`,
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      data: frameUrl,
-    };
-
-    // Axios를 사용하여 DELETE 요청 보내기
-    axios(deleteFrameRequest)
-      .then((response) => {
-        // 삭제 요청이 성공했을 때의 동작
-        console.log("프레임 삭제 요청 성공:", response.data);
-        // 필요에 따라 상태(state)를 업데이트하거나 다른 작업 수행
-      })
-      .catch((error) => {
-        // 삭제 요청이 실패했을 때의 동작
-        console.error("프레임 삭제 요청 실패:", error);
-        // 오류 처리 혹은 다른 처리 로직 구현
-      });
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
+        },
+      };
+      axios
+        .delete(
+          "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
+          config,
+          { data: frameUrl }
+        )
+        .then((res) => {
+          console.log(res.data);
+          // 성공적으로 데이터를 받아온 경우
+          setFrames(res.data); // 받아온 데이터로 frames 상태 업데이트
+        })
+        .catch((err) => {
+          // 오류 처리
+          console.error("API 요청 중 오류 발생:", err);
+        });
+    }
   };
 
   const handleUploadedImage = (event) => {
@@ -106,40 +100,47 @@ const ApplyFrame = () => {
   };
 
   const handleSaveClick = () => {
-    // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
     if (accessToken) {
-      const frameElement = document.querySelector("img");
+      const frameElement = document.querySelector(`.${styles.Frame}`);
       frameElement.src = selectedFrame;
 
       html2canvas(frameElement).then((canvas) => {
-        canvas.toBlob((blob) => {
-          const formData = new FormData();
-          formData.append("photo", blob, "photo.png");
+        const context = canvas.getContext("2d");
 
-          console.log(formData);
+        const selectedFrameImg = new Image();
+        selectedFrameImg.crossOrigin = "anonymous";
+        selectedFrameImg.src =
+          selectedFrame + "?timestamp=" + new Date().getTime();
+        console.log(selectedFrameImg);
+        selectedFrameImg.onload = () => {
+          context.drawImage(selectedFrameImg, 0, 0);
 
-          // axios 요청 설정
-          const config = {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
-            },
-          };
+          // Convert canvas content to blob and save
+          canvas.toBlob((blob) => {
+            const formData = new FormData();
+            formData.append("photo", blob, "frame.png");
 
-          axios
-            .post(
-              "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/photo",
-              formData,
-              config
-            )
-            .then((res) => {
-              console.log("프레임 적용한 사진 저장 API 응답:", res.data);
-            })
-            .catch((err) => {
-              // 오류 처리
-              console.error("API 요청 중 오류 발생:", err);
-            });
-        }, "image/png");
+            const config = {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${accessToken}`,
+              },
+            };
+
+            axios
+              .post(
+                "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/photo",
+                formData,
+                config
+              )
+              .then((res) => {
+                console.log("프레임 적용한 사진 저장 API 응답:", res.data);
+              })
+              .catch((err) => {
+                console.error("API 요청 중 오류 발생:", err);
+              });
+          }, "image/png");
+        };
       });
     }
   };
@@ -148,12 +149,11 @@ const ApplyFrame = () => {
     <div className={styles.ApplyFrame}>
       <div className={styles.ApplyFramebox}>
         <div className={styles.Top}>
-          <button
-            className={styles.ImgBtn}
-            onClick={() => handleEditFrame(selectedFrame)}
-          >
-            <img src={edit} alt="edit" />
-          </button>
+          <Link to="/frame">
+            <button className={styles.ImgBtn}>
+              <img src={left} alt="left" />
+            </button>
+          </Link>
           <button
             className={styles.ImgBtn}
             onClick={() => handleDeleteFrame(selectedFrame)}
@@ -200,7 +200,7 @@ const ApplyFrame = () => {
                 전체 프레임
               </button>
             </Link>
-            <Link to="/photobook">
+            <Link to="/photoselect">
               <button className={styles.now}>
                 <img src={photobook} alt="photobook"></img>
                 포토북

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import home from "../../img/home.png";
@@ -45,7 +45,7 @@ const MakeFrame = () => {
   const [draggingStickerIndex, setDraggingStickerIndex] = useState(null);
   const [stickerPos, setStickerPos] = useState({ x: 100, y: 100 });
   const [frames, setFrames] = useState([]);
-  const [bottomContentHeight, setBottomContentHeight] = useState(270);
+  const [bottomContentHeight, setBottomContentHeight] = useState(200);
 
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
@@ -115,6 +115,14 @@ const MakeFrame = () => {
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
+
+    // 브러쉬 버튼을 클릭했을 때 bottomContentHeight를 조정하여 Middle 영역의 높이를 변경
+    if (button === "브러쉬") {
+      setBottomContentHeight(70); // 브러쉬 버튼 클릭 시 높이 변경 (원하는 값으로 설정)
+    } else {
+      // 다른 버튼 클릭 시 기본 높이로 변경
+      setBottomContentHeight(200); // 기본 높이 설정 (원하는 값으로 설정)
+    }
   };
 
   const setTransform = () => {
@@ -136,6 +144,18 @@ const MakeFrame = () => {
     zoomCanvas.width = zoomCanvas.width;
     setTransform();
     context.drawImage(stickerImg, 0, 0, zoomCanvas.width, zoomCanvas.height);
+
+    selectedStickers.forEach((pos, index) => {
+      if (selectedStickers[index] && pos) {
+        context.drawImage(
+          selectedStickers[index],
+          pos.x,
+          pos.y,
+          stickerSize,
+          stickerSize
+        );
+      }
+    });
   };
 
   useEffect(() => {
@@ -267,7 +287,13 @@ const MakeFrame = () => {
   };
 
   const handleSaveClick = () => {
-    setUploadedImage(null);
+    // 저장하기 전에 uploadedImage를 일시적으로 숨깁니다.
+    const uploadedImageElement = document.querySelector(
+      `.${styles.UploadedImage}`
+    );
+    if (uploadedImageElement) {
+      uploadedImageElement.style.display = "none";
+    }
 
     // 액세스 토큰이 있을 때만 API 요청을 보내도록 조건 처리
     if (accessToken) {
@@ -277,6 +303,8 @@ const MakeFrame = () => {
         canvas.toBlob((blob) => {
           const formData = new FormData();
           formData.append("frame", blob, "frame.png");
+
+          console.log(formData);
 
           // axios 요청 설정
           const config = {
@@ -296,6 +324,7 @@ const MakeFrame = () => {
               console.log("프레임 저장 API 응답:", res.data);
               const updatedFrames = [...frames, res.data]; // 새로운 데이터 추가
               setFrames(updatedFrames);
+              return <Navigate to="/frame" />;
             })
             .catch((err) => {
               // 오류 처리
@@ -337,16 +366,7 @@ const MakeFrame = () => {
       );
       break;
     case "브러쉬":
-      bottomContent = (
-        <div
-          className={styles.ListBottom}
-          style={{
-            height: "70px",
-          }}
-        >
-          <Brush ctx={ctx} setCtx={setCtx} />
-        </div>
-      );
+      bottomContent = <Brush ctx={ctx} setCtx={setCtx} />;
       break;
     case "사진 추가":
       bottomContent = <AddPhoto handleUploadedImage={handleUploadedImage} />;
@@ -383,6 +403,7 @@ const MakeFrame = () => {
               <img src={home} alt="logo" />
             </button>
           </Link>
+
           <button className={styles.ImgBtn} onClick={handleSaveClick}>
             <img src={save} alt="save" />
           </button>
@@ -448,8 +469,16 @@ const MakeFrame = () => {
             <button onClick={undoAction}>실행 취소</button>
           </div>
         </div>
-        <div className={styles.Bottom}>
-          {bottomContent}
+        <div
+          className={styles.Bottom}
+          // style={{ transform: `translateY(${bottomContentHeight - 130}px)` }}
+        >
+          <div
+            className={styles.BottomContent}
+            style={{ height: `${bottomContentHeight}px` }}
+          >
+            {bottomContent}
+          </div>
           <div className={styles.ListBottom}>
             <button
               className={styles.now}
