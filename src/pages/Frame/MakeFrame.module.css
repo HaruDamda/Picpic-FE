@@ -86,17 +86,17 @@ body {
   position: absolute;
 }
 
+.BaseFrame {
+  position: absolute;
+  z-index: 2;
+}
+
 .UploadedImage {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-}
-
-.BaseFrame {
-  position: absolute;
-  z-index: 2;
 }
 
 .UploadedSticker {
@@ -124,6 +124,11 @@ body {
   margin-top: 10px;
 } */
 
+.Bottom {
+  width: 100%;
+  height: 270px;
+}
+
 .Return {
   width: 390px;
   height: 40px;
@@ -138,11 +143,6 @@ body {
 .Return button {
   background-color: #ffffff;
   border: none;
-}
-
-.Bottom {
-  width: 100%;
-  height: 270px;
 }
 
 .ListTop {

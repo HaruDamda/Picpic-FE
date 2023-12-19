@@ -300,37 +300,64 @@ const MakeFrame = () => {
       const frameElement = document.querySelector(`.${styles.Frame}`);
 
       html2canvas(frameElement, { backgroundColor: null }).then((canvas) => {
-        canvas.toBlob((blob) => {
-          const formData = new FormData();
-          formData.append("frame", blob, "frame.png");
+        const ctx = canvas.getContext("2d");
 
-          console.log(formData);
+        const stickerImagePromises = selectedStickers.map((selectedSticker) => {
+          return new Promise((resolve) => {
+            const stickerImg = new Image();
+            stickerImg.crossOrigin = "anonymous"; // Set cross-origin attribute
+            stickerImg.onload = () => resolve(stickerImg);
+            stickerImg.src =
+              selectedSticker + "?timestamp=" + new Date().getTime();
+          });
+        });
 
-          // axios 요청 설정
-          const config = {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
-            },
-          };
+        Promise.all(stickerImagePromises).then((loadedStickerImages) => {
+          loadedStickerImages.forEach((stickerImg, index) => {
+            const stickerPos = stickerPositions[index];
+            if (stickerPos) {
+              ctx.drawImage(
+                stickerImg,
+                stickerPos.x,
+                stickerPos.y,
+                stickerSize,
+                stickerSize
+              );
+            }
+          });
 
-          axios
-            .post(
-              "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
-              formData,
-              config
-            )
-            .then((res) => {
-              console.log("프레임 저장 API 응답:", res.data);
-              const updatedFrames = [...frames, res.data]; // 새로운 데이터 추가
-              setFrames(updatedFrames);
-              return <Navigate to="/frame" />;
-            })
-            .catch((err) => {
-              // 오류 처리
-              console.error("API 요청 중 오류 발생:", err);
-            });
-        }, "image/png");
+          canvas.toBlob((blob) => {
+            const formData = new FormData();
+            formData.append("frame", blob, "frame.png");
+
+            console.log(formData);
+
+            // axios 요청 설정
+            const config = {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${accessToken}`, // 헤더에 accessToken을 추가
+              },
+            };
+
+            axios
+              .post(
+                "http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/frame",
+                formData,
+                config
+              )
+              .then((res) => {
+                console.log("프레임 저장 API 응답:", res.data);
+                const updatedFrames = [...frames, res.data]; // 새로운 데이터 추가
+                setFrames(updatedFrames);
+                return <Navigate to="/frame" />;
+              })
+              .catch((err) => {
+                // 오류 처리
+                console.error("API 요청 중 오류 발생:", err);
+              });
+          }, "image/png");
+        });
       });
     }
   };
@@ -465,20 +492,15 @@ const MakeFrame = () => {
               />
             ))}
           </div>
-          <div className={styles.Return}>
-            <button onClick={undoAction}>실행 취소</button>
-          </div>
         </div>
         <div
           className={styles.Bottom}
           // style={{ transform: `translateY(${bottomContentHeight - 130}px)` }}
         >
-          <div
-            className={styles.BottomContent}
-            style={{ height: `${bottomContentHeight}px` }}
-          >
-            {bottomContent}
+          <div className={styles.Return}>
+            <button onClick={undoAction}>실행 취소</button>
           </div>
+          <div className={styles.BottomContent}>{bottomContent}</div>
           <div className={styles.ListBottom}>
             <button
               className={styles.now}
