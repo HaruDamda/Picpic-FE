@@ -24,15 +24,13 @@ import memopic2 from "../../img/memopic2.png";
 import memopic3 from "../../img/memopic3.png";
 import memopic4 from "../../img/memopic4.png";
 import memopic5 from "../../img/memopic5.png";
-import useAxios from "../../apis/axiosWithToken";
+import axios from "axios";
 
 export default function Photobook() {
-  {
-    /* 포토북 UI 시작 */
-  }
+  {/* 포토북 UI 시작 */}
   const index = useRef(0);
   const [ref, { width }] = useMeasure();
-  const [photos, setPhotos] = useState([]);
+	const [photos, setPhotos] = useState([]);
   const [activeDot, setActiveDot] = useState(0);
   const [props, api] = useSprings(
     photos.length,
@@ -46,7 +44,7 @@ export default function Photobook() {
   const bind = useDrag(
     ({ active, movement: [mx], direction: [xDir], distance, cancel }) => {
       if (active && distance > width / 2) {
-        setActiveDot(null);
+				setActiveDot(null);
         index.current = clamp(
           index.current + (xDir > 0 ? -1 : 1),
           0,
@@ -61,18 +59,17 @@ export default function Photobook() {
         const scale = active ? 1 - distance / width / 2 : 1;
         return { x, scale, display: "block" };
       });
-
-      // 스크롤에 따른 활성화를 유지
-      // setActiveDot(clamp(Math.round(index.current), 0, photos.length - 1));
-      // 클릭한 동그라미가 있다면 스크롤로 인한 활성화를 무시하고 클릭한 동그라미를 유지
-      const activeDotIndex = clamp(
-        Math.round(index.current),
-        0,
-        photos.length - 1
-      );
-      setActiveDot(activeDotIndex);
-      // console.log("스크롤 점 인덱스: ", activeDotIndex);
-    }
+      
+			// 스크롤에 따른 활성화를 유지
+			// 클릭한 동그라미가 있다면 스크롤로 인한 활성화를 무시하고 클릭한 동그라미를 유지
+			const activeDotIndex = clamp(
+				Math.round(index.current),
+				0,
+				photos.length - 1
+			);
+			setActiveDot(activeDotIndex);
+			// console.log("스크롤 점 인덱스: ", activeDotIndex);
+		}
   );
   // 동그라미를 클릭했을 때 해당 사진으로 이동하는 함수
   const handleDotClick = (dotIndex) => {
@@ -83,48 +80,48 @@ export default function Photobook() {
       const x = (i - index.current) * width;
       return { x, scale: 1, display: "block" };
     });
-    setActiveDot(null); // 클릭한 동그라미를 활성화 상태로 설정
+		setActiveDot(null); // 클릭한 동그라미를 활성화 상태로 설정
   };
-  {
-    /* 포토북 UI 마침 */
-  }
+  {/* 포토북 UI 마침 */}
 
-  const axios = useAxios();
   const [modal, setModal] = useState(0);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
-  const [uuidData, setUuidData] = useState(null);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
+  // const [uuidData, setUuidData] = useState(null);
   const [isEmojiBoxVisible, setIsEmojiBoxVisible] = useState(false);
   const { uuid } = useParams();
+  const [memos, setMemos] = useState([]); // 메모 리스트 Dto배열 저장
+  const [modalMemoContent, setModalMemoContent] = useState(""); // 선택한 메모 content 저장
+  const [modalMemoVisible, setModalMemoVisible] = useState(false); // 모달 창 오픈 시 메모 컨텐츠 보여줄지 말지 상태 저장
 
   const emojiArray = [emoji1, emoji2, emoji3, emoji4, emoji5];
   const emojiArray2 = [emoji01, emoji02, emoji03, emoji04, emoji05];
   const memopicArray = [memopic1, memopic2, memopic3, memopic4, memopic5];
 
   useEffect(() => {
+    const apiUrl = `http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/photoBook/${uuid}`
     axios
-      .get(`/photoBook/${uuid}`) // 인스턴스로 axios 요청 보내기
+      .get(apiUrl) // 인스턴스로 axios 요청 보내기
       .then((response) => {
         console.log(response.data);
-        setPhotos(response.data.photoList);
-        setUuidData(response.data.uuid);
+				setPhotos(response.data.photoList);
+        setMemos(response.data.memoList);
       })
       .catch((error) => console.error(error));
   }, [uuid]);
 
-  const selectEmoji = (index) => {
-    setSelectedEmoji(index);
-    // // 이미 선택된 emoji가 있다면 선택 취소
-    // if (selectedEmoji !== null && selectedEmoji === index) {
-    //   // 이미 선택된 경우에는 아무 동작도 하지 않음
-    //   return;
-    // } else {
-    //   // 선택된 emoji가 없거나 다른 emoji를 선택한 경우 크기 조절
-    //   setSelectedEmoji(index);
-    // }
+  const handleMemosClick = (memoIndex) => {
+    const modalContent = memos[memoIndex].content;
+    setModalMemoContent(modalContent);
+    setModal(1);
+    setModalMemoVisible(true);
   };
 
-  const toggleEmojiBox = () => {
-    setIsEmojiBoxVisible(!isEmojiBoxVisible);
+  const selectEmoji = (i) => {
+    // 선택한 emoji 정보를 저장
+    setSelectedEmoji(i);
+    // 이미지 선택 시 포토인덱스 저장
+    setSelectedPhotoIndex(index.current);
   };
 
   // 이모지 박스 애니메이션 스타일 설정
@@ -134,33 +131,115 @@ export default function Photobook() {
     config: { tension: 200, friction: 20, mass: 1, duration: 100 },
   });
 
-  // const shareLink = () => {
-  //   // 현재 경로에 uuid를 붙여서 공유할 링크 생성
-  //   const shareableLink = `${window.location.href}/${uuidData}`;
+  // 메모픽 위치 상태 추가
+  const [memopicPosition, setMemopicPosition] = useState({
+    top: Math.floor(Math.random() * 365) - 10,
+    left: Math.floor(Math.random() * 250) - 10,
+  });
 
-  //   // 클립보드에 복사
-  //   navigator.clipboard
-  //     .writeText(shareableLink)
-  //     .then(() => {
-  //       console.log("링크가 클립보드에 복사되었습니다.");
-  //     })
-  //     .catch((err) => {
-  //       console.error("링크 복사 중 오류 발생:", err);
-  //     });
-  // 	console.log("링크:", `${window.location.href}/${uuidData}`);
-  //   // // 현재 주소에 uuid 파라미터 추가
-  //   // const currentUrl = new URL(window.location.href);
-  //   // currentUrl.searchParams.set('uuid', 'YOUR_UUID'); // 여기에 받아온 uuid 변수를 넣어주세요
-  //   // navigator.clipboard.writeText(currentUrl.href)
-  //   //   .then(() => {
-  //   //     alert('링크가 복사되었습니다.');
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.error('링크 복사 중 오류 발생:', error);
-  //   //   });
-  // };
+  const handleMemopicClick = () => {
+    setModal(1);
+    setModalMemoVisible(false);
+    setMemopicPosition({
+      top: memopicPosition.top,
+      left: memopicPosition.left,
+    });    
+    setIsEmojiBoxVisible(false);
+  };
 
-  const saveMemo = () => {};
+  // 이모지 박스에서의 클릭 이벤트 핸들러
+  const handleEmojiClick = (index) => {
+    // 선택한 emoji 정보를 저장
+    selectEmoji(index);
+
+    // 새로운 랜덤 위치를 생성하고 설정
+    setMemopicPosition({
+      top: Math.floor(Math.random() * 365) - 10,
+      left: Math.floor(Math.random() * 250) - 10,
+    });
+  };
+  const shareLink = () => {
+    // 현재 경로에 uuid를 붙여서 공유할 링크 생성
+    const shareableLink = `${window.location.href}/${uuid}`;
+
+    
+    // 클립보드에 복사
+    const copyToClipboard = (text) => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(
+          () => {
+            alert("링크가 클립보드에 복사되었습니다.");
+          },
+          (err) => {
+            console.error("링크 복사 중 오류 발생:", err);
+            alert("링크 복사 중 오류 발생");
+          }
+        );
+      } else {
+        // Navigator clipboard API가 지원되지 않는 경우 대체 방법 사용
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed"; // 임시로 고정 위치에 텍스트 영역 생성
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          document.execCommand("copy");
+          alert("링크가 클립보드에 복사되었습니다.");
+        } catch (err) {
+          console.error("링크 복사 중 오류 발생:", err);
+          alert("링크 복사 중 오류 발생");
+        } finally {
+          document.body.removeChild(textArea); // 생성한 텍스트 영역 제거
+        }
+      }
+    };
+
+    copyToClipboard(shareableLink);
+    console.log("링크:", `${window.location.href}/${uuid}`);
+    // // 현재 주소에 uuid 파라미터 추가
+    // const currentUrl = new URL(window.location.href);
+    // currentUrl.searchParams.set('uuid', 'YOUR_UUID'); // 여기에 받아온 uuid 변수를 넣어주세요
+    // navigator.clipboard.writeText(currentUrl.href)
+    //   .then(() => {
+    //     alert('링크가 복사되었습니다.');
+    //   })
+    //   .catch((error) => {
+    //     console.error('링크 복사 중 오류 발생:', error);
+    //   });
+  };
+
+  // 메모 저장
+  const [memoText, setMemoText] = useState(""); // 메모 작성한 내용 저장
+
+  const saveMemo = async (uuid) => {
+    const apiURL = `http://ec2-3-35-208-177.ap-northeast-2.compute.amazonaws.com:8080/memo/${uuid}`
+    const saveMemoDto = {
+      "x": memopicPosition.left,
+      "y": memopicPosition.top,
+      "pageNum": selectedPhotoIndex,
+      "content": memoText,
+      "emojiNum": selectedEmoji
+    };
+    console.log(saveMemoDto);
+    try {
+      // 서버에 메모 저장 요청
+      const response = await axios.post(apiURL, saveMemoDto);
+  
+      // 응답이 200이면 성공
+      if (response.status === 200) {
+        alert("메모가 성공적으로 저장되었습니다.");
+      } else {
+        // 다른 상태 코드가 반환된 경우
+        alert("메모 저장에 실패했습니다.");
+      }
+    } catch (error) {
+      // 오류가 발생한 경우 (401 등)
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -184,13 +263,38 @@ export default function Photobook() {
                 className={styles.photo}
                 style={{ scale, backgroundImage: `url(${photos[i]})` }}
               />
-              {/* 선택된 photo일 때만 memopic을 렌더링 */}
-              {selectedEmoji !== null && i === index.current && (
+              {memos.map((memo, memoIndex) => {
+                if (memo.pageNum === i) {
+                  // Check if there is a memo for the current photo
+                  return (
+                    <animated.img
+                      key={memoIndex}
+                      className={styles.memopic}
+                      src={`${memopicArray[memo.emojiNum]}`}
+                      style={{
+                        scale,
+                        position: "absolute",
+                        top: `${memo.y}px`,
+                        left: `${memo.x}px`,
+                      }}
+                      onClick={() => handleMemosClick(memoIndex)}
+                    />
+                  );
+                } else {
+                  return null; // No memo for the current photo
+                }
+              })}
+              {selectedEmoji !== null && selectedPhotoIndex === i && (
                 <animated.img
                   className={styles.memopic}
                   src={`${memopicArray[selectedEmoji]}`}
-                  style={{ scale, top: 186, left: 114, position: "absolute" }}
-                  onClick={() => setModal(1)}
+                  style={{
+                    scale,
+                    position: "absolute",
+                    top: `${memopicPosition.top}px`, // 클릭 시의 위치를 고정
+                    left: `${memopicPosition.left}px`, // 클릭 시의 위치를 고정
+                  }}
+                  onClick={handleMemopicClick}
                 />
               )}
             </animated.div>
@@ -209,10 +313,30 @@ export default function Photobook() {
           </div>
         </div>
         {/* <Viewpager /> */}
+        {/* 이모지 박스 */}
+        {isEmojiBoxVisible && (
+          <animated.div className={styles.emojiBox} style={emojiBoxSpring}>
+            {emojiArray.map((emoji, index) => (
+              <img
+                key={index}
+                className={`${styles.emoji} ${
+                  selectedEmoji === index ? styles.selectedEmoji : ""
+                }`}
+                src={selectedEmoji === index ? emojiArray2[index] : emoji}
+                width={selectedEmoji === index ? 50 : 40}
+                height={selectedEmoji === index ? 50 : 40}
+                alt={`emoji-${index}`}
+                onClick={() => {
+                  handleEmojiClick(index);
+                }}
+              />
+            ))}
+          </animated.div>
+        )}
       </div>
       <div className={styles.section3}>
         <div className={styles.buttonBox}>
-          <button onClick={toggleEmojiBox}>
+          <button onClick={() => setIsEmojiBoxVisible(true)}>
             <img className={styles.memoIcon} src={memoIcon} alt={memoIcon} />
           </button>
           <p>쪽지 입력하기</p>
@@ -225,41 +349,35 @@ export default function Photobook() {
       <div className={styles[`modal${modal}`]}>
         <img className={styles.memoModal} src={memoModal} alt={memoModal} />
         <div className={styles.modalBox}>
-          <textarea></textarea>
-          <button
-            className={styles.saveBtn}
-            onClick={() => {
-              saveMemo();
-            }}
-          >
-            확인
-          </button>
+          {modalMemoVisible === true && (
+            <div className={styles.modalMemo}>
+              {modalMemoContent}
+            </div>
+          )}
+          {modalMemoVisible !== true && (
+            <>
+              <textarea
+                value={memoText}
+                onChange={(e) => setMemoText(e.target.value)}
+              />
+              <button
+                className={styles.saveBtn}
+                onClick={() => {
+                  saveMemo(uuid);
+                  setModal(0);
+                }}
+              >
+                저장
+              </button>
+            </>
+          )}
         </div>
       </div>
       <div
         className={styles[`modalBG${modal}`]}
         onClick={() => setModal(0)}
       ></div>
-      {/* 이모지 박스 */}
-      {isEmojiBoxVisible && (
-        <animated.div className={styles.emojiBox} style={emojiBoxSpring}>
-          {emojiArray.map((emoji, index) => (
-            <img
-              key={index}
-              className={`${styles.emoji} ${
-                selectedEmoji === index ? styles.selectedEmoji : ""
-              }`}
-              src={selectedEmoji === index ? emojiArray2[index] : emoji}
-              width={selectedEmoji === index ? 50 : 40}
-              height={selectedEmoji === index ? 50 : 40}
-              alt={`emoji-${index}`}
-              onClick={() => {
-                selectEmoji(index);
-              }}
-            />
-          ))}
-        </animated.div>
-      )}
     </div>
   );
 }
+

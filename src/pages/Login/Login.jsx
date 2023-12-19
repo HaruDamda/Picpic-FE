@@ -72,6 +72,7 @@ function LoginForm() {
       router("/frame");
     } catch (error) {
       console.error(error);
+      alert("확인할 수 없는 회원정보입니다. 다시 입력해주세요.");
     }
   };
 
