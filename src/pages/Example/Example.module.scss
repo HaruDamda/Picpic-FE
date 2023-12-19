@@ -1,0 +1,23 @@
+.card {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transition: box-shadow 0.5s, opacity 0.5s;
+  will-change: transform;
+  border: 10px solid white;
+  cursor: grab;
+  overflow: hidden;
+  touch-action: none;
+}
+img {
+  
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
